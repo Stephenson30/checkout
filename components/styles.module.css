@@ -1,0 +1,67 @@
+.Header{
+    padding: 1.2rem;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fcf8f8;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+
+.logo{
+    font-family: fantasy;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgb(84, 105, 97);
+}
+
+.flex{
+    padding: 1rem;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    gap: 8px;
+}
+
+.flex p{
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.flex button{
+    color: black;
+    font-size: 1rem;
+    border: none;
+    padding: .7rem 1rem;
+    background: #b9b9b9;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.footer{
+    background: rgb(84, 105, 97);
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+    font-size: .9rem;
+    margin: 0;
+    width: 100%;
+}
+
+.footer hr{
+    margin: 1rem 0;
+}
+
+.footer > div{
+    display: inline-flex;
+    gap: 40px;
+}
+
+.footer p{
+    font-weight: bold;
+
+}
