@@ -19,7 +19,7 @@ export default function Header() {
       ) : (
         <div className={styles.flex}>
           <p>Not signed in</p>
-          <button onClick={() => signIn("google")} style={{background:"none", fontWeight: "bold"}}>Sign in</button>
+          <button onClick={() => signIn("google")} style={{background:"none", fontWeight: "bold"}}>Log in</button>
           <button onClick={() => signIn("google")}>Sign up</button>
         </div>
       )}
