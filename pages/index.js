@@ -2,10 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+// import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // const router = useRouter();
+
   return (
     <>
       <Head>
@@ -34,7 +37,7 @@ export default function Home() {
 
             <div className={styles.firstSection2}>
               <div>
-                <button>Generate Invoice</button>
+                {/* <button onClick={()=>{router.replace("/checkout")}}>Generate Invoice</button> */}
                 <p>Priortize Your Customer</p>
               </div>
             </div>
