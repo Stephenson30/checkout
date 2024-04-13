@@ -20,10 +20,14 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    picture: {
+    image: {
         type: String,
         required: false
-    }
+    },
+    business_name: {
+        type: String,
+        required: true
+    },
 }, {timestamps: true});
 
 const User = models.User || mongoose.model("User", userSchema);

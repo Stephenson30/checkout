@@ -26,6 +26,8 @@ export const authOptions = {
 
       if (account.provider === "google") {
         const { name, email, family_name, given_name, picture } = profile;
+        
+
         // console.log("name: ", name);
         // console.log("email: ", email);
 
