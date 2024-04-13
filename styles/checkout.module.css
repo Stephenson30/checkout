@@ -22,6 +22,7 @@
   margin-left: 1rem;
   width: 300px;
   padding: 0.5rem;
+  color: black;
 }
 
 .business > div {
@@ -52,6 +53,7 @@
   border: none;
   background: #fff;
   box-shadow: 1px 1px 10px gray;
+  color: black;
 }
 
 .items {
@@ -99,6 +101,7 @@
   background: #fff;
   box-shadow: 1px 1px 10px gray;
   margin: 15px 10px;
+  color: black;
 }
 
 .form button:focus,
