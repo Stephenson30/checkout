@@ -1,15 +1,19 @@
 .form {
   width: 100%;
+  /* max-width: fit-content; */
   height: 100vh;
   padding: 100px 0;
   color: black;
+  /* border: 1px solid rgb(28, 3, 255); */
+
 }
 
-.form > div {
-  width: fit-content;
+/* .form .formFlex {
+  width: 100%;
   margin: 0 auto;
   padding: 1rem 0 4rem;
-}
+  border: 1px solid rgb(255, 0, 0);
+  } */
 
 .business p,
 .p {
@@ -149,8 +153,98 @@
   /* margin-left: 300px; */
 }
 
+.form .btnCtaAdd{
+  padding: .9rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.877);
+  font-size: .9rem;
+  /* margin-left: 300px; */
+}
+
+.currency{
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem 1rem .5rem;
+}
+
+.currency select:focus{
+  outline: none;
+}
+
+.currency select {
+  padding: 0.3rem;
+  font-size: .9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  box-shadow: 1px 1px 10px gray;
+  color: black;
+}
+
+.setBusinessPopUp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  background: grey;
+  width: 100%;
+  opacity: .9;
+}
+
+.setBusinessPopUp p {
+  margin: 10px 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.setBusinessSubPopUp{
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  text-align: center;
+  width: 371px;
+  margin: 0 auto;
+  transform: translateY(50%);
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.formFlex{
+  width: 100%;
+  margin: 0 auto;
+  /* border: 1px solid black; */
+  /* padding: 0 6rem; */
+}
+
+.receiptSection{
+   display: none;
+}
+
 @media (min-width: 750px){
     .business > div {
         padding-left: 0;
       }
+
+      .formFlex{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 30%;
+        margin: 0 auto;
+        /* border: 1px solid black; */
+        /* padding: 0 6rem; */
+      }
+
+      .receiptSection{
+        display: block;
+     }
+
+     .form .btnCta{
+      display: none;
+     }
 }

@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <div className={styles.Header}>
-      <p className={styles.logo}>CHECKOUT</p>
+      <p className={styles.logo}>TILLDESK</p>
       {session ? (
         <div className={styles.flex}>
           <p>Signed in as {session?.user?.email}</p>

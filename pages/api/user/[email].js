@@ -36,11 +36,11 @@ export default async function handler(req, res) {
 
       if (user) {
           // Update user information
+          console.log(`user: ${user.name} ${businessName}`)
           user.name = businessName || user.name;
           user.picture = image || user.picture;
           // Add other fields you want to update
           
-        //   console.log(`user: ${user}`)
         // Save the updated user document
         await user.save();
 
