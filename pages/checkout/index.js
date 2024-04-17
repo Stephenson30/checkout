@@ -13,10 +13,15 @@ export default function InvoicePage() {
   ]);
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
+  const [address, setAddress] = useState("");
+  const [number, setNumber] = useState("");
   const [currency, setCurrency] = useState("");
+  const [issued, setIssued] = useState("");
   const [isPopUp, setIsPopUp] = useState(false);
   const [isSession, setIsSession] = useState(true);
   const [payment, setPayment] = useState("");
+  const [toggle, setToggle] = useState(false);
+  const [toggleItem, setToggleItem] = useState(true);
   const router = useRouter();
   // console.log(currency);
 
@@ -60,7 +65,7 @@ export default function InvoicePage() {
 
   useEffect(() => {
     getUser();
-  }, [session]);
+  }, [session?.email]);
 
   // Adding new input field
   const addInput = () => {
@@ -133,208 +138,384 @@ export default function InvoicePage() {
         </div> */}
 
         <div className={styles.formFlex}>
-          <div>
+          <div className={styles.firstFlex}>
             <form>
               <div className={styles.business}>
-                <p>Add Business Details</p>
-
-                <div>
-                  <div className={styles.dropzone}>
-                    <label htmlFor="addImage">
-                      {img ? (
-                        <Image
-                          src={img}
-                          alt="img"
-                          className={styles.image}
-                          width={100}
-                          height={100}
-                        />
-                      ) : (
-                        <Icon
-                          icon="ph:image"
-                          className={styles.icon}
-                          width={"100"}
-                        />
-                      )}
-                    </label>
-                    <input
-                      type="file"
-                      id="addImage"
-                      name="addImage"
-                      accept="image/*"
-                      // value={img}
-                      required
-                      onChange={(e) => {
-                        // console.log(`file: ${e.target.files[0]}`);
-                        const file = e.target.files[0];
-                        if (file) {
-                          // Read the file as a Data URL
-                          const reader = new FileReader();
-                          reader.onloadend = () => {
-                            // Set the base64-encoded image data
-                            setImg(reader.result);
-
-                            // console.log(reader.result);
-                          };
-                          reader.readAsDataURL(file);
-                        }
-                      }}
-                    />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Business Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className={styles.itemSection}>
-                <p className={styles.p}>Add Items</p>
-                <div className={styles.currency}>
-                  <select
-                    // style={{padding: ".3rem 0"}}
-                    id="paymentSelect"
-                    onChange={(e) => {
-                      setPayment(e.target.value);
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "2rem 0",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "2px",
                     }}
                   >
-                    <option value="">PAYMENT TYPE</option>
-                    <option value="Cash">CASH</option>
-                    <option value="Bank Transfer">BANK TFR</option>
-                    <option value="Card">CARD</option>
-                    <option value="Crypto">CRYPTO</option>
-                  </select>
-                  <select
-                    id="currencySelect"
-                    onChange={(e) => {
-                      if (e.target.value === "") setIsPopUp(true);
-                      setCurrency(e.target.value);
-                    }}
-                  >
-                    <option value="$">CURRENCY</option>
-                    <option value="$">USD</option>
-                    <option value="€">EUR</option>
-                    <option value="¥">JPY</option>
-                    <option value="£">GBP</option>
-                    <option value="A$">AUD</option>
-                    <option value="C$">CAD</option>
-                    <option value="Fr">CHF</option>
-                    <option value="¥">CNY</option>
-                    <option value="kr">SEK</option>
-                    <option value="NZ$">NZD</option>
-                    <option value="₹">INR</option>
-                    <option value="R">ZAR</option>
-                    <option value="E£">EGP</option>
-                    <option value="₦">NGN</option>
-                    <option value="KSh">KES</option>
-                    <option value="د.ج">DZD</option>
-                    <option value="DH">MAD</option>
-                    <option value="GH₵">GHS</option>
-                    <option value="DT">TND</option>
-                    <option value="Kz">AOA</option>
-                    <option value="USh">UGX</option>
-                    <option value="₡">CRC</option>
-                    <option value="₱">PHP</option>
-                    <option value="₫">VND</option>
-                    <option value="₪">ILS</option>
-                    <option value="₺">TRY</option>
-                    <option value="Rp">IDR</option>
-                    <option value="RM">MYR</option>
-                    <option value="₽">RUB</option>
-                    <option value="Br">BRL</option>
-                    <option value="CLP$">CLP</option>
-                    <option value="COP$">COP</option>
-                    <option value="S/">PEN</option>
-                    <option value="KD">KWD</option>
-                    <option value="Ft">HUF</option>
-                    <option value="₴">UAH</option>
-                    <option value="QAR">QAR</option>
-                    <option value="NT$">TWD</option>
-                    <option value="lei">RON</option>
-                    <option value="ARS$">ARS</option>
-                    <option value="JD">JOD</option>
-                    <option value="BD">BHD</option>
-                    <option value="﷼">SAR</option>
-                    <option value="">OTHERS</option>
-                    {/* <!-- Add more options for other currencies --> */}
-                  </select>
-                </div>
-                <div className={styles.flex}>
-                  <p>Name</p>
-                  <div className={styles.flexprice}>
-                    <p>Quantity</p>
-                    <p>Price</p>
-                  </div>
-                </div>
-                {items.map((item, index) => (
-                  <div key={index} className={styles.items}>
-                    <input
-                      type="text"
-                      placeholder="Item name"
-                      value={item.name}
-                      className={styles.name}
-                      onChange={(e) => {
-                        const newItems = [...items];
-                        newItems[index].name = e.target.value;
-                        setItems(newItems);
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Quantity"
-                      value={item.quantity}
-                      className={styles.quantity}
-                      onChange={(e) => {
-                        const newItems = [...items];
-                        newItems[index].quantity = e.target.value;
-                        setItems(newItems);
-                      }}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Price"
-                      value={item.price}
-                      className={styles.price}
-                      onChange={(e) => {
-                        const newItems = [...items];
-                        newItems[index].price = e.target.value;
-                        setItems(newItems);
-                      }}
-                    />
                     <Icon
-                      icon="ic:baseline-delete"
+                      icon="material-symbols:drag-indicator"
+                      width="1.5rem"
+                      height="1.5rem"
+                      style={{ color: "#888888" }}
+                    />
+                    <p>SLIP DETAILS</p>
+                  </div>
+                  {toggle ? (
+                    <Icon
+                      icon="mdi:chevron-down"
                       width="1.2rem"
                       height="1.2rem"
-                      style={{ color: "red" }}
+                      style={{
+                        color: "#888888",
+                        border: "1px solid #888888",
+                        borderRadius: "50%",
+                        padding: ".1rem",
+                      }}
                       onClick={() => {
-                        const newItems = items.filter(
-                          (eachItem) => eachItem.id != item.id
-                        );
-                        setItems(newItems);
+                        setToggle(false);
+                        setToggleItem(true);
                       }}
                     />
+                  ) : (
+                    <Icon
+                      icon="mingcute:up-line"
+                      width="1.2rem"
+                      height="1.2rem"
+                      style={{
+                        color: "#888888",
+                        border: "1px solid #888888",
+                        borderRadius: "50%",
+                        padding: ".1rem",
+                      }}
+                      onClick={() => {
+                        setToggle(true);
+                        setToggleItem(false);
+                      }}
+                    />
+                  )}
+                </div>
+                <div style={{ display: toggle ? "none" : "block" }}>
+                  <div className={styles.logo}>
+                    <div className={styles.inputContainer}>
+                      <label>Business name</label>
+                      <input
+                        type="text"
+                        placeholder="Business Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className={styles.dropzone}>
+                      <label htmlFor="addImage">
+                        {img ? (
+                          <Image
+                            src={img}
+                            alt="img"
+                            className={styles.image}
+                            width={100}
+                            height={100}
+                          />
+                        ) : (
+                          <Icon
+                            icon="ph:image"
+                            className={styles.icon}
+                            width="4.5rem"
+                            height="4.5rem"
+                          />
+                        )}
+                      </label>
+                      <input
+                        type="file"
+                        id="addImage"
+                        name="addImage"
+                        accept="image/*"
+                        // value={img}
+                        required
+                        onChange={(e) => {
+                          // console.log(`file: ${e.target.files[0]}`);
+                          const file = e.target.files[0];
+                          if (file) {
+                            // Read the file as a Data URL
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              // Set the base64-encoded image data
+                              setImg(reader.result);
+
+                              console.log(reader.result);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </div>
                   </div>
-                ))}
+                  <div className={styles.inputContainer}>
+                    <label>Business address</label>
+                    <br />
+                    <input
+                      type="text"
+                      placeholder="Enter your business address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.inputContainer}>
+                    <label>Business number</label>
+                    <br />
+                    <input
+                      style={{ width: "100%" }}
+                      type="text"
+                      placeholder="Enter your business number"
+                      value={number}
+                      onChange={(e) => setNumber(e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.inputContainer}>
+                    <label>Issued to:</label>
+                    <br />
+                    <input
+                      style={{ width: "100%" }}
+                      type="text"
+                      placeholder="Enter your customer name"
+                      value={issued}
+                      onChange={(e) => setIssued(e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.currency}>
+                    <div>
+                      <label>Payment type</label>
+                      <br />
+                      <select
+                        // style={{padding: ".3rem 0"}}
+                        id="paymentSelect"
+                        onChange={(e) => {
+                          setPayment(e.target.value);
+                        }}
+                      >
+                        <option value="Bank Transfer">Bank transfer</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                        <option value="Crypto">Crypto</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label>Currency</label>
+                      <br />
+                      <select
+                        id="currencySelect"
+                        onChange={(e) => {
+                          if (e.target.value === "") setIsPopUp(true);
+                          setCurrency(e.target.value);
+                        }}
+                      >
+                        <option defaultValue={"$"} value="$">
+                          USD
+                        </option>
+                        <option value="€">EUR</option>
+                        <option value="¥">JPY</option>
+                        <option value="£">GBP</option>
+                        <option value="A$">AUD</option>
+                        <option value="C$">CAD</option>
+                        <option value="Fr">CHF</option>
+                        <option value="¥">CNY</option>
+                        <option value="kr">SEK</option>
+                        <option value="NZ$">NZD</option>
+                        <option value="₹">INR</option>
+                        <option value="R">ZAR</option>
+                        <option value="E£">EGP</option>
+                        <option value="₦">NGN</option>
+                        <option value="KSh">KES</option>
+                        <option value="د.ج">DZD</option>
+                        <option value="DH">MAD</option>
+                        <option value="GH₵">GHS</option>
+                        <option value="DT">TND</option>
+                        <option value="Kz">AOA</option>
+                        <option value="USh">UGX</option>
+                        <option value="₡">CRC</option>
+                        <option value="₱">PHP</option>
+                        <option value="₫">VND</option>
+                        <option value="₪">ILS</option>
+                        <option value="₺">TRY</option>
+                        <option value="Rp">IDR</option>
+                        <option value="RM">MYR</option>
+                        <option value="₽">RUB</option>
+                        <option value="Br">BRL</option>
+                        <option value="CLP$">CLP</option>
+                        <option value="COP$">COP</option>
+                        <option value="S/">PEN</option>
+                        <option value="KD">KWD</option>
+                        <option value="Ft">HUF</option>
+                        <option value="₴">UAH</option>
+                        <option value="QAR">QAR</option>
+                        <option value="NT$">TWD</option>
+                        <option value="lei">RON</option>
+                        <option value="ARS$">ARS</option>
+                        <option value="JD">JOD</option>
+                        <option value="BD">BHD</option>
+                        <option value="﷼">SAR</option>
+                        <option value="">OTHERS</option>
+                        {/* <!-- Add more options for other currencies --> */}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.itemSection}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "2rem 0",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "2px",
+                    }}
+                  >
+                    <Icon
+                      icon="material-symbols:drag-indicator"
+                      width="1.5rem"
+                      height="1.5rem"
+                      style={{ color: "#888888" }}
+                    />
+                    <p className={styles.p}>SLIP ITEMS</p>
+                  </div>
+                  {toggleItem ? (
+                    <Icon
+                      icon="mdi:chevron-down"
+                      width="1.2rem"
+                      height="1.2rem"
+                      style={{
+                        color: "#888888",
+                        border: "1px solid #888888",
+                        borderRadius: "50%",
+                        padding: ".1rem",
+                      }}
+                      onClick={() => {
+                        setToggleItem(false);
+                        setToggle(true);
+                      }}
+                    />
+                  ) : (
+                    <Icon
+                      icon="mingcute:up-line"
+                      width="1.2rem"
+                      height="1.2rem"
+                      style={{
+                        color: "#888888",
+                        border: "1px solid #888888",
+                        borderRadius: "50%",
+                        padding: ".1rem",
+                      }}
+                      onClick={() => {
+                        setToggleItem(true);
+                        setToggle(false);
+                      }}
+                    />
+                  )}
+                </div>
+
+                <div style={{ display: toggleItem ? "none" : "block" }}>
+                  {items.map((item, index) => (
+                    <div key={index}>
+                      <div className={styles.items} style={{paddingRight:"5px"}}>
+                        <div style={{width:"100%"}}>
+                          <label>Product name</label>
+                          <input
+                            type="text"
+                            placeholder="Enter the service you are offering"
+                            value={item.name}
+                            className={styles.name}
+                            onChange={(e) => {
+                              const newItems = [...items];
+                              newItems[index].name = e.target.value;
+                              setItems(newItems);
+                            }}
+                          />
+                        </div>
+                        <Icon
+                          icon="ic:baseline-delete"
+                          width="1.5rem"
+                          height="1.5rem"
+                          style={{ color: "red", marginTop:"25px"}}
+                          onClick={() => {
+                            const newItems = items.filter(
+                              (eachItem) => eachItem.id != item.id
+                            );
+                            setItems(newItems);
+                          }}
+                        />
+                      </div>
+                      <div className={styles.items} style={{gap:"30px", paddingTop:"1rem"}}>
+                        <div>
+                          <label>Quantity</label>
+                          <br></br>
+                          <input
+                            type="number"
+                            placeholder="Quantity"
+                            value={item.quantity}
+                            className={styles.quantity}
+                            onChange={(e) => {
+                              const newItems = [...items];
+                              newItems[index].quantity = e.target.value;
+                              setItems(newItems);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <label>Price</label>
+                          <br></br>
+                          <input
+                            type="number"
+                            placeholder="Price"
+                            value={item.price}
+                            className={styles.price}
+                            onChange={(e) => {
+                              const newItems = [...items];
+                              newItems[index].price = e.target.value;
+                              setItems(newItems);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </form>
-            <div className={styles.flex}>
-              <button onClick={addInput}>
-                <Icon
-                  icon="gridicons:add-outline"
-                  width="1rem"
-                  height="1rem"
-                  style={{ color: "black" }}
-                />
-                <p>Add another</p>
-              </button>
-              <button onClick={handleSubmit} className={styles.btnCta}>
-                Preview
-              </button>
+
+            <div  style={{ display: toggleItem ? "none" : "block" }}>
+              <div
+                className={styles.flex}
+              >
+                <button onClick={addInput} className={styles.btn}>
+                  <Icon
+                    icon="gridicons:add-outline"
+                    width="1.2rem"
+                    height="1.2rem"
+                    style={{ color: "black" }}
+                  />
+                  <p>Add new item</p>
+                </button>
+                <button onClick={handleSubmit} className={styles.btnCta}>
+                  Preview
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className={styles.receiptSection}>receipt section</div>
+          <div className={styles.receiptSection}>
+            <div className={styles.receipt}> what</div>
+          </div>
         </div>
         {/*  */}
       </div>
