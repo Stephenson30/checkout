@@ -172,11 +172,7 @@
   margin-top: -8px;
 }
 
-.form .btnCta {
-  width: Fixed (130px) px;
-  height: Fixed (35px) px;
-  top: 735px;
-  left: 115px;
+.form .flex .btnCta {
   padding: .65rem 2rem;
   gap: 2px;
   border-radius: 10px;
@@ -190,7 +186,6 @@
   text-align: center;
   color: #fff;
   background: #c344ff ;
-  /* border: 0.6px solid #9C00E5 */
 }
 
 .form .btnCtaAdd {
@@ -288,26 +283,26 @@
   .formFlex {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     gap: 100px;
     margin: 0 auto;
-    /* border: 1px solid black; */
-    /* padding: 0 6rem; */
+    padding-top: 0;
+    margin-top: 0;
   }
 
   .firstFlex {
     width: 100%;
     max-width: 40%;
   }
+  
   .receiptSection {
-    display: block;
+    padding-top: 0;
+    margin-top: 0;
     width: 100%;
     max-width: 350px;
-    height: 100vh;
-    padding-left: 3rem;
-    display: grid;
-    padding-top: 8rem;
+    overflow-y: unset;
+    padding-bottom: 3rem;
   }
 
   .receipt {
@@ -317,9 +312,11 @@
     background: #ffffff;
     box-shadow: 1px 1px 10px gray;
     place-items: center;
+    position: fixed;
   }
 
   .form .btnCta {
     display: none;
   }
+
 }

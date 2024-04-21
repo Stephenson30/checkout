@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Icon } from "@iconify-icon/react";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
-import { Invoice, AppBtn } from "@/components/Doc";
 import Center from "@/components/templetes/Center";
 
 export default function InvoicePage() {
@@ -25,6 +24,7 @@ export default function InvoicePage() {
   const [toggle, setToggle] = useState(false);
   const [toggleItem, setToggleItem] = useState(true);
   const [isPreview, setIsPreview] = useState(false);
+  const [isPreviewLarge, setIsPreviewLarge] = useState(false);
   const router = useRouter();
   // console.log(currency);
 
@@ -67,6 +67,30 @@ export default function InvoicePage() {
   };
 
   useEffect(() => {
+    // Function to update isPreview based on window width
+    const updatePreview = () => {
+      if (window.innerWidth < 750) {
+        setIsPreview(false);
+        setIsPreviewLarge(false);
+      } else {
+        setIsPreview(true);
+        setIsPreviewLarge(true);
+      }
+    };
+
+    // Initial check on component mount
+    updatePreview();
+
+    // Event listener for window resize
+    window.addEventListener("resize", updatePreview);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("resize", updatePreview);
+    };
+  }, []); // Empty dependency array to run effect only once on mount
+
+  useEffect(() => {
     getUser();
   }, [session?.email]);
 
@@ -84,15 +108,27 @@ export default function InvoicePage() {
 
   return (
     <div className={styles.form}>
-      <Icon
-        icon="entypo:back"
-        width="1.2rem"
-        height="1.2rem"
-        style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
-        onClick={() => {
-          router.replace("/");
-        }}
-      />
+      {isPreview ? (
+        <Icon
+          icon="entypo:back"
+          width="1.2rem"
+          height="1.2rem"
+          style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
+          onClick={() => {
+            setIsPreview(false)
+          }}
+        />
+      ) : (
+        <Icon
+          icon="entypo:back"
+          width="1.2rem"
+          height="1.2rem"
+          style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
+          onClick={() => {
+            router.replace("/");
+          }}
+        />
+      )}
       <div>
         <div
           className={styles.setBusinessPopUp}
@@ -141,7 +177,17 @@ export default function InvoicePage() {
         </div> */}
 
         <div className={styles.formFlex}>
-          <div className={styles.firstFlex} style={{display: isPreview?"none":"block"}}>
+          <div
+            className={styles.firstFlex}
+            style={{
+              display:
+                isPreview && isPreviewLarge
+                  ? "block"
+                  : !isPreview && !isPreviewLarge
+                  ? "block"
+                  : "none",
+            }}
+          >
             <form>
               <div className={styles.business}>
                 <div
@@ -169,7 +215,7 @@ export default function InvoicePage() {
                   </div>
                   {toggle ? (
                     <Icon
-                      icon="mdi:chevron-down"
+                      icon="mingcute:up-line"
                       width="1.2rem"
                       height="1.2rem"
                       style={{
@@ -185,7 +231,7 @@ export default function InvoicePage() {
                     />
                   ) : (
                     <Icon
-                      icon="mingcute:up-line"
+                      icon="mdi:chevron-down"
                       width="1.2rem"
                       height="1.2rem"
                       style={{
@@ -394,7 +440,7 @@ export default function InvoicePage() {
                   </div>
                   {toggleItem ? (
                     <Icon
-                      icon="mdi:chevron-down"
+                      icon="mingcute:up-line"
                       width="1.2rem"
                       height="1.2rem"
                       style={{
@@ -410,7 +456,7 @@ export default function InvoicePage() {
                     />
                   ) : (
                     <Icon
-                      icon="mingcute:up-line"
+                      icon="mdi:chevron-down"
                       width="1.2rem"
                       height="1.2rem"
                       style={{
@@ -442,13 +488,19 @@ export default function InvoicePage() {
                         style={{ paddingRight: "5px" }}
                       >
                         <div style={{ width: "100%" }}>
-                          <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
                             <label>Product name</label>
                             <Icon
                               icon="ic:baseline-delete"
                               width="1.5rem"
                               height="1.5rem"
-                              style={{ color: "red",}}
+                              style={{ color: "red" }}
                               onClick={() => {
                                 const newItems = items.filter(
                                   (eachItem) => eachItem.id != item.id
@@ -522,16 +574,28 @@ export default function InvoicePage() {
                   />
                   <p>Add new item</p>
                 </button>
-                <button onClick={()=>{setIsPreview(true)}} className={styles.btnCta}>
+                <button
+                  onClick={() => {
+                    if(!items || !name || !img || !address || !number
+                      || !currency || !issued || !payment){
+                        alert("Input all details");
+                        return;
+                      }
+                    setIsPreview(true);
+                  }}
+                  className={styles.btnCta}
+                >
                   Preview
                 </button>
               </div>
             </div>
           </div>
 
-          <div className={styles.receiptSection} style={{display: isPreview?"block":"none"}}>
-            <Center />
-            <AppBtn />
+          <div
+            className={styles.receiptSection}
+            style={{ display: isPreview ? "block" : "none" }}
+          >
+            <Center items={items} name={name} img={img} address={address} number={number} currency={currency} issued={issued}  payment={payment}/>
           </div>
         </div>
         {/*  */}
