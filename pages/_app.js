@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Head from "next/head";
+
 
 export default function App({
   Component,
@@ -9,21 +11,43 @@ export default function App({
 }) {
   if (Component.getLayout) {
     return (
-      <SessionProvider session={session}>
-        {Component.getLayout(
-          <>
-            <Component {...pageProps} />
-          </>
-        )}
-      </SessionProvider>
+      <>
+        <Head>
+          <title>Tilldeck</title>
+          <meta
+            name="description"
+            content="Generate Invoice Receipt In One Click"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/tilldeck.png" />
+        </Head>
+        <SessionProvider session={session}>
+          {Component.getLayout(
+            <>
+              <Component {...pageProps} />
+            </>
+          )}
+        </SessionProvider>
+      </>
     );
   }
 
   return (
-    <SessionProvider session={session}>
-      <Header />
+    <>
+      <Head>
+        <title>Tilldeck</title>
+        <meta
+          name="description"
+          content="Generate Invoice Receipt In One Click"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/tilldeck.png" />
+      </Head>
+      <SessionProvider session={session}>
+        <Header />
         <Component {...pageProps} />
-      <Footer />
-    </SessionProvider>
+        <Footer />
+      </SessionProvider>
+    </>
   );
 }

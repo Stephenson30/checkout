@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>CHECKOUT</title>
+        <title>Tilldeck</title>
         <meta name="description" content="Generate Invoice Receipt In One Click" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/tilldeck.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div>

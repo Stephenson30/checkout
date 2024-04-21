@@ -10,12 +10,12 @@
     z-index: 1000;
 }
 
-.logo{
-    font-family: fantasy;
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: rgb(84, 105, 97);
+.logoName{
+    display: flex;
+    align-items: center;
+    gap: 2.46px;
 }
+
 
 .flex{
     padding: 1rem;
@@ -83,4 +83,18 @@
         border-radius: 8px;
         cursor: pointer;
     }    
+
+    .menu{
+        display: none;
+    }
+
+    .logoName .logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .logoName .name {
+        width: 132.96px;
+        height: 27.69px;
+    }
 }

@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Icon } from "@iconify-icon/react";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
+import { Invoice, AppBtn } from "@/components/Doc";
+import Center from "@/components/templetes/Center";
 
 export default function InvoicePage() {
   const { data: session } = useSession();
@@ -22,6 +24,7 @@ export default function InvoicePage() {
   const [payment, setPayment] = useState("");
   const [toggle, setToggle] = useState(false);
   const [toggleItem, setToggleItem] = useState(true);
+  const [isPreview, setIsPreview] = useState(false);
   const router = useRouter();
   // console.log(currency);
 
@@ -138,7 +141,7 @@ export default function InvoicePage() {
         </div> */}
 
         <div className={styles.formFlex}>
-          <div className={styles.firstFlex}>
+          <div className={styles.firstFlex} style={{display: isPreview?"none":"block"}}>
             <form>
               <div className={styles.business}>
                 <div
@@ -146,7 +149,7 @@ export default function InvoicePage() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    padding: "2rem 0",
+                    padding: "2rem 0 0",
                   }}
                 >
                   <div
@@ -426,10 +429,34 @@ export default function InvoicePage() {
 
                 <div style={{ display: toggleItem ? "none" : "block" }}>
                   {items.map((item, index) => (
-                    <div key={index}>
-                      <div className={styles.items} style={{paddingRight:"5px"}}>
-                        <div style={{width:"100%"}}>
-                          <label>Product name</label>
+                    <div
+                      key={index}
+                      style={{
+                        borderBottom: "1px dashed gray",
+                        paddingBottom: "2rem",
+                        paddingTop: "2rem",
+                      }}
+                    >
+                      <div
+                        className={styles.items}
+                        style={{ paddingRight: "5px" }}
+                      >
+                        <div style={{ width: "100%" }}>
+                          <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                            <label>Product name</label>
+                            <Icon
+                              icon="ic:baseline-delete"
+                              width="1.5rem"
+                              height="1.5rem"
+                              style={{ color: "red",}}
+                              onClick={() => {
+                                const newItems = items.filter(
+                                  (eachItem) => eachItem.id != item.id
+                                );
+                                setItems(newItems);
+                              }}
+                            />
+                          </div>
                           <input
                             type="text"
                             placeholder="Enter the service you are offering"
@@ -442,20 +469,11 @@ export default function InvoicePage() {
                             }}
                           />
                         </div>
-                        <Icon
-                          icon="ic:baseline-delete"
-                          width="1.5rem"
-                          height="1.5rem"
-                          style={{ color: "red", marginTop:"25px"}}
-                          onClick={() => {
-                            const newItems = items.filter(
-                              (eachItem) => eachItem.id != item.id
-                            );
-                            setItems(newItems);
-                          }}
-                        />
                       </div>
-                      <div className={styles.items} style={{gap:"30px", paddingTop:"1rem"}}>
+                      <div
+                        className={styles.items}
+                        style={{ gap: "30px", paddingTop: "1rem" }}
+                      >
                         <div>
                           <label>Quantity</label>
                           <br></br>
@@ -493,28 +511,27 @@ export default function InvoicePage() {
               </div>
             </form>
 
-            <div  style={{ display: toggleItem ? "none" : "block" }}>
-              <div
-                className={styles.flex}
-              >
+            <div style={{ display: toggleItem ? "none" : "block" }}>
+              <div className={styles.flex}>
                 <button onClick={addInput} className={styles.btn}>
                   <Icon
                     icon="gridicons:add-outline"
                     width="1.2rem"
                     height="1.2rem"
-                    style={{ color: "black" }}
+                    style={{ color: "#C344FF" }}
                   />
                   <p>Add new item</p>
                 </button>
-                <button onClick={handleSubmit} className={styles.btnCta}>
+                <button onClick={()=>{setIsPreview(true)}} className={styles.btnCta}>
                   Preview
                 </button>
               </div>
             </div>
           </div>
 
-          <div className={styles.receiptSection}>
-            <div className={styles.receipt}> what</div>
+          <div className={styles.receiptSection} style={{display: isPreview?"block":"none"}}>
+            <Center />
+            <AppBtn />
           </div>
         </div>
         {/*  */}
