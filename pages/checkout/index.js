@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import Center from "@/components/templetes/Center";
 import Swal from "sweetalert2";
 import { MutatingDots } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function InvoicePage() {
   const { data: session } = useSession();
@@ -68,7 +70,7 @@ export default function InvoicePage() {
 
     // getBusinessDetail();
     setIsLoading(true);
-    console.log("loading...")
+    console.log("loading...");
     // Simulate asynchronous operation
     setTimeout(() => {
       setIsLoading(false);
@@ -82,11 +84,13 @@ export default function InvoicePage() {
         !issued ||
         !payment
       ) {
-        alert("Input all details");
+        toast.error("Please complete all input details.");
         return;
       }
-      setIsPreview(pre => !pre);
-      // setIsPreview(true);
+      setIsPreview((pre) => !pre);
+      if (!isPreview) {
+        toast.success("You have sucessfully generated an invoice");
+      }
       // Perform other actions after loading
     }, 3000); // 3 seconds delay
   };
@@ -151,14 +155,14 @@ export default function InvoicePage() {
 
   return (
     <div className={styles.form}>
-      {isPreview ? (
+      {isPreview && !isPreviewLarge ? (
         <Icon
           icon="entypo:back"
           width="1.2rem"
           height="1.2rem"
           style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
           onClick={() => {
-            handlePreview()
+            handlePreview();
             // setIsPreview(false);
           }}
         />
@@ -197,13 +201,13 @@ export default function InvoicePage() {
                 radius="14"
                 color="#9C00E5"
                 ariaLabel="loading"
-                
-                // wrapperStyle
-                // wrapperClass
               />
             </div>
           </div>
         )}
+
+        <ToastContainer />
+
         {/* <div
           className={styles.setBusinessPopUp}
           style={{ display: !isSession ? "block" : "none" }}
@@ -623,10 +627,7 @@ export default function InvoicePage() {
                   />
                   <p>Add new item</p>
                 </button>
-                <button
-                  onClick={handlePreview}
-                  className={styles.btnCta}
-                >
+                <button onClick={handlePreview} className={styles.btnCta}>
                   Preview slip
                 </button>
               </div>

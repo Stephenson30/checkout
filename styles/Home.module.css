@@ -95,6 +95,11 @@
   background: #c344ff;
   display: block;
   margin: 0 auto;
+  transition: all .3s;
+}
+
+.firstSection button:hover{
+  transform: scale(1.1);
 }
 
 .secondSection {
