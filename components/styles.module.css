@@ -67,7 +67,11 @@
 
 }
 
-@media(min-width: 730px){
+@media(min-width: 850px){
+    .Header{
+        padding-bottom: 0;
+    }
+
     .flex p{
         font-size: .9rem;
         font-weight: 400;

@@ -6,6 +6,8 @@ import { Icon } from "@iconify-icon/react";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import Center from "@/components/templetes/Center";
+import Swal from "sweetalert2";
+import { MutatingDots } from "react-loader-spinner";
 
 export default function InvoicePage() {
   const { data: session } = useSession();
@@ -25,6 +27,7 @@ export default function InvoicePage() {
   const [toggleItem, setToggleItem] = useState(true);
   const [isPreview, setIsPreview] = useState(false);
   const [isPreviewLarge, setIsPreviewLarge] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   // console.log(currency);
 
@@ -57,13 +60,35 @@ export default function InvoicePage() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!session) {
-      setIsSession(false);
-    }
+  // handling the preview
+  const handlePreview = () => {
+    // if (!session) {
+    //   setIsSession(false);
+    // }
 
-    getBusinessDetail();
-    // console.log(`item${items} currency:${currency} name: ${name}`)
+    // getBusinessDetail();
+    setIsLoading(true);
+    console.log("loading...")
+    // Simulate asynchronous operation
+    setTimeout(() => {
+      setIsLoading(false);
+      if (
+        !items ||
+        !name ||
+        !img ||
+        !address ||
+        !number ||
+        !currency ||
+        !issued ||
+        !payment
+      ) {
+        alert("Input all details");
+        return;
+      }
+      setIsPreview(pre => !pre);
+      // setIsPreview(true);
+      // Perform other actions after loading
+    }, 3000); // 3 seconds delay
   };
 
   useEffect(() => {
@@ -106,6 +131,24 @@ export default function InvoicePage() {
     setItems(newItems);
   };
 
+  const openPopup = () => {
+    Swal.fire({
+      title: "Add Currency Symbol",
+      html: `
+        <input id="currencyInput" class="swal2-input" placeholder="Add Currency Symbol">
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        const currency = document.getElementById("currencyInput").value;
+        setCurrency(currency);
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsPopUp(false);
+      }
+    });
+  };
+
   return (
     <div className={styles.form}>
       {isPreview ? (
@@ -115,7 +158,8 @@ export default function InvoicePage() {
           height="1.2rem"
           style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
           onClick={() => {
-            setIsPreview(false)
+            handlePreview()
+            // setIsPreview(false);
           }}
         />
       ) : (
@@ -130,33 +174,36 @@ export default function InvoicePage() {
         />
       )}
       <div>
-        <div
-          className={styles.setBusinessPopUp}
-          style={{ display: !isPopUp ? "none" : "block" }}
-        >
-          <div className={styles.setBusinessSubPopUp}>
-            <input
-              type="text"
-              placeholder="Add Currency Symbol"
-              value={currency}
-              className={styles.name}
-              onChange={(e) => {
-                setCurrency(e.target.value);
-              }}
-            />
-            <div>
-              <button
-                onClick={() => {
-                  setIsPopUp(false);
-                }}
-                className={styles.btnCtaAdd}
-              >
-                Add
+        <div>
+          <div
+            className={styles.setBusinessPopUp}
+            style={{ display: !isPopUp ? "none" : "block" }}
+          >
+            <div className={styles.setBusinessSubPopUp}>
+              <button onClick={openPopup} className={styles.btnCtaAdd}>
+                Add Currency
               </button>
             </div>
           </div>
         </div>
 
+        {isLoading && (
+          <div className={styles.setBusinessAlert}>
+            <div className={styles.setBusinessSubAlert}>
+              <MutatingDots
+                height="100"
+                width="100"
+                secondaryColor="#C344FF"
+                radius="14"
+                color="#9C00E5"
+                ariaLabel="loading"
+                
+                // wrapperStyle
+                // wrapperClass
+              />
+            </div>
+          </div>
+        )}
         {/* <div
           className={styles.setBusinessPopUp}
           style={{ display: !isSession ? "block" : "none" }}
@@ -184,6 +231,8 @@ export default function InvoicePage() {
                 isPreview && isPreviewLarge
                   ? "block"
                   : !isPreview && !isPreviewLarge
+                  ? "block"
+                  : !isPreview
                   ? "block"
                   : "none",
             }}
@@ -575,17 +624,10 @@ export default function InvoicePage() {
                   <p>Add new item</p>
                 </button>
                 <button
-                  onClick={() => {
-                    if(!items || !name || !img || !address || !number
-                      || !currency || !issued || !payment){
-                        alert("Input all details");
-                        return;
-                      }
-                    setIsPreview(true);
-                  }}
+                  onClick={handlePreview}
                   className={styles.btnCta}
                 >
-                  Preview
+                  Preview slip
                 </button>
               </div>
             </div>
@@ -595,7 +637,16 @@ export default function InvoicePage() {
             className={styles.receiptSection}
             style={{ display: isPreview ? "block" : "none" }}
           >
-            <Center items={items} name={name} img={img} address={address} number={number} currency={currency} issued={issued}  payment={payment}/>
+            <Center
+              items={items}
+              name={name}
+              img={img}
+              address={address}
+              number={number}
+              currency={currency}
+              issued={issued}
+              payment={payment}
+            />
           </div>
         </div>
         {/*  */}

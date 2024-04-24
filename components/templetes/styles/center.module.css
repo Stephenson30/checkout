@@ -26,8 +26,8 @@
 
 .header .logo {
   display: block;
-  width: 23px;
-  height: 23px;
+  width: 40px;
+  height: 40px;
   margin: 0 auto;
   border-radius: 15px;
 }
@@ -42,25 +42,26 @@
 
 .header p {
   font-family: Inter;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
 }
 
 .client {
-  padding: 0.6rem 0;
+  padding: 0.8rem 0;
 }
 
 .client > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: .1rem 0;
 }
 
 .detail {
   font-family: Inter;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
@@ -69,7 +70,7 @@
 
 .aboutDetail {
   font-family: Inter;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
@@ -77,7 +78,7 @@
 
 .table table thead tr th {
   font-family: Inter;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
@@ -90,18 +91,10 @@
 
 .table tbody td {
   font-family: Inter;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
-}
-
-.tableBody {
-  padding-top: 0.6rem;
-}
-
-.tableRow {
-  padding-top: 10px;
 }
 
 .footer {
@@ -115,7 +108,7 @@
 
 .footer p {
   font-family: Inter;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.30000001192092896px;
@@ -124,7 +117,7 @@
 
 .btn {
   font-family: Inter;
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 26.63px;
   letter-spacing: -0.8999999761581421px;
@@ -132,8 +125,12 @@
   background: #C344FF;
   border: 1.1px solid #9C00E5;
   color: #fff;
-  padding: .2rem .5rem;
+  padding: .5rem 1rem;
   border-radius: 5px;
   display: block;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
