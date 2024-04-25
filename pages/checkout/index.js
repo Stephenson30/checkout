@@ -20,11 +20,11 @@ export default function InvoicePage() {
   const [img, setImg] = useState("");
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState("₦");
   const [issued, setIssued] = useState("");
   const [isPopUp, setIsPopUp] = useState(false);
   const [isSession, setIsSession] = useState(true);
-  const [payment, setPayment] = useState("");
+  const [payment, setPayment] = useState("Bank Transfer");
   const [toggle, setToggle] = useState(false);
   const [toggleItem, setToggleItem] = useState(true);
   const [isPreview, setIsPreview] = useState(false);
@@ -36,9 +36,18 @@ export default function InvoicePage() {
   const getUser = async () => {
     const res = await fetch(`/api/user/${session?.user?.email}`);
     const data = await res.json();
+    // console.log(data)
     setName(data.name);
     setImg(data.image);
+    setAddress(data.address);
+    setNumber(data.number);
   };
+
+
+  useEffect(() => {
+    getUser();
+  }, [session]);
+
 
   const getBusinessDetail = async () => {
     try {
@@ -48,8 +57,10 @@ export default function InvoicePage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          image: img,
-          businessName: name,
+          img,
+          name,
+          address,
+          number
         }),
       });
       if (res.ok) {
@@ -64,11 +75,28 @@ export default function InvoicePage() {
 
   // handling the preview
   const handlePreview = () => {
-    // if (!session) {
-    //   setIsSession(false);
-    // }
+    if (!session?.user?.email) {
+      Swal.fire({
+        title: "Sign Up",
+        text: "Sign up to save your business details for next time.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Sign Up",
+        cancelButtonText: "Ignore",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to sign-up page
+          signIn("google");
+        } else {
+          // Ignore sign-up suggestion and continue
+        }
+      });
+    }
 
-    // getBusinessDetail();
+    if(session){
+      getBusinessDetail();
+    }
+
     setIsLoading(true);
     console.log("loading...");
     // Simulate asynchronous operation
@@ -119,10 +147,7 @@ export default function InvoicePage() {
     };
   }, []); // Empty dependency array to run effect only once on mount
 
-  useEffect(() => {
-    getUser();
-  }, [session?.email]);
-
+ 
   // Adding new input field
   const addInput = () => {
     const newItems = [...items];
@@ -398,7 +423,7 @@ export default function InvoicePage() {
                           setPayment(e.target.value);
                         }}
                       >
-                        <option value="Bank Transfer">Bank transfer</option>
+                        <option defaultValue={"Bank Transfer"} value="Bank Transfer">Bank transfer</option>
                         <option value="Cash">Cash</option>
                         <option value="Card">Card</option>
                         <option value="Crypto">Crypto</option>
@@ -414,9 +439,8 @@ export default function InvoicePage() {
                           setCurrency(e.target.value);
                         }}
                       >
-                        <option defaultValue={"$"} value="$">
-                          USD
-                        </option>
+                        <option defaultValue={"₦"} value="₦">NGN</option>
+                        <option value="$">USD</option>
                         <option value="€">EUR</option>
                         <option value="¥">JPY</option>
                         <option value="£">GBP</option>
@@ -429,7 +453,6 @@ export default function InvoicePage() {
                         <option value="₹">INR</option>
                         <option value="R">ZAR</option>
                         <option value="E£">EGP</option>
-                        <option value="₦">NGN</option>
                         <option value="KSh">KES</option>
                         <option value="د.ج">DZD</option>
                         <option value="DH">MAD</option>
@@ -647,6 +670,7 @@ export default function InvoicePage() {
               currency={currency}
               issued={issued}
               payment={payment}
+              isPreviewLarge={isPreviewLarge}
             />
           </div>
         </div>

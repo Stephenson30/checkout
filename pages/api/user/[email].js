@@ -1,5 +1,4 @@
 import { connectMongoDB } from "@/lib/mongodb";
-import Business from "@/models/business";
 import User from "@/models/user";
 
 export default async function handler(req, res) {
@@ -11,11 +10,13 @@ export default async function handler(req, res) {
     try {
       await connectMongoDB();
       const userLog = await User.findOne({ email }); // Correct the usage of findById
-    //   console.log(userLog);
+      // console.log(userLog);
       if (userLog) {
         const returnData = {
           name: userLog.name,
           image: userLog.picture,
+          address: userLog.family_name,
+          number: userLog.given_name,
         };
 
         res.status(200).json(returnData);
@@ -28,19 +29,21 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "POST") {
     const { email } = req.query;
-    const { businessName, image } = req.body;
+    const { img, name, address, number } = req.body;
 
     try {
       await connectMongoDB();
       const user = await User.findOne({ email });
 
       if (user) {
-          // Update user information
-          console.log(`user: ${user.name} ${businessName}`)
-          user.name = businessName || user.name;
-          user.picture = image || user.picture;
-          // Add other fields you want to update
-          
+        // Update user information
+        // console.log(`user: ${user.name} ${name}`);
+        user.name = name || user.name;
+        user.picture = img || user.picture;
+        user.family_name = address || user.picture;
+        user.given_name = number || user.picture;
+        // Add other fields you want to update
+
         // Save the updated user document
         await user.save();
 

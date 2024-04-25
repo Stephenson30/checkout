@@ -1,25 +1,33 @@
 import mongoose, { Schema, models } from "mongoose";
 
 
-const businessSchema = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
-    contact: {
+    email: {
         type: String,
-        required: true
+        required: true,
     },
-    logo: {
+    phone: {
         type: String,
-        required: true
+        required: true,
     },
-    description: {
+    business_name:{
         type: String,
-        required: false
-    }
-});
+        required: true,
+    },
+    business_image:{
+        type: String,
+        required: true,
+    },
+    business_address:{
+        type: String,
+        required: true,
+    },
+}, {timestamps: true});
 
-const Business = models.Business || mongoose.model('Business', businessSchema);
 
-export default Business;
+const User = models.User || mongoose.model("User", userSchema);
+export default User;

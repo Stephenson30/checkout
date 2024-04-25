@@ -26,7 +26,7 @@ export default function Header() {
           className={styles.name}
         />
       </div>
-      {/* {session ? (
+      {session ? (
         <div className={styles.flex}>
           <p>Signed in as {session?.user?.email}</p>
           <button onClick={() => signOut()}>Sign out</button>
@@ -42,15 +42,15 @@ export default function Header() {
           </button>
           <button onClick={() => signIn("google")}>Sign up</button>
         </div>
-      )} */}
+      )}
 
-      <Icon
+      {/* <Icon
         icon="mdi:menu"
         width="1.5rem"
         height="1.5rem"
         style={{ color: "black"}}
         className={styles.menu}
-      />
+      /> */}
     </div>
   );
 }

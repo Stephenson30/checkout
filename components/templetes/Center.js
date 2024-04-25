@@ -5,6 +5,9 @@ import { saveAs } from "file-saver";
 import { useRef } from "react";
 import { Icon } from "@iconify-icon/react";
 import { useEffect, useState } from 'react';
+import { signOut, signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 
 export default function Center({
@@ -16,10 +19,14 @@ export default function Center({
   currency,
   issued,
   payment,
+  isPreviewLarge
 }) {
 
   const [currentDateTime, setCurrentDateTime] = useState("");
   const componentRef = useRef(null);
+  const { data: session } = useSession();
+  const router = useRouter();
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,6 +39,32 @@ export default function Center({
     // Cleanup function to clear the interval
     return () => clearInterval(interval);
   }, [items]);
+
+
+  const handleDownload = () => {
+    if (!session && isPreviewLarge) {
+      // If user is not signed in, display a popup suggesting sign-up
+      Swal.fire({
+        title: "Sign Up",
+        text: "Sign up to save your business details for next time.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Sign Up",
+        cancelButtonText: "Ignore",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to sign-up page
+          signIn("google");
+        } else {
+          // Ignore sign-up suggestion and continue
+          handleDownloadImage();
+        }
+      });
+    } else {
+      // If user is signed in, directly download business details
+      handleDownloadImage();
+    }
+  };
 
 
   const handleDownloadImage = () => {
@@ -48,9 +81,10 @@ export default function Center({
     <div>
       <div className={styles.center} ref={componentRef}>
         <div className={styles.dot}></div>
+        {/* <button onClick={()=>signOut()}>click</button> */}
         <div className={styles.header}>
           <Image
-            src={"/tilldeck.svg"}
+            src={img}
             alt="logo"
             width={40}
             height={40}
@@ -130,7 +164,7 @@ export default function Center({
         <div className={styles.dot}></div>
       </div>
       <div>
-        <button className={styles.btn} onClick={handleDownloadImage}>
+        <button className={styles.btn} onClick={handleDownload}>
           <Icon
             icon="mdi:arrow-collapse-down"
             width="1.4rem"

@@ -25,10 +25,9 @@ export const authOptions = {
       // console.log("User: ", profile);
 
       if (account.provider === "google") {
-        const { name, email, family_name, given_name, picture } = profile;
-        
+        const { name, email, family_name, given_name, picture, iss } = profile;
 
-        // console.log("name: ", name);
+        // console.log("name: ", profile);
         // console.log("email: ", email);
 
         try {
@@ -36,24 +35,34 @@ export const authOptions = {
           const userExists = await User.findOne({ email });
 
           if (!userExists) {
-            await User.create({
-              name,
-              email,
-              family_name,
-              given_name,
-              picture,
+            const res = await fetch("http://localhost:3000/api/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name, email, family_name, given_name, picture, iss 
+              }),
             });
 
-            console.log("User registered");
-          } 
-          return true; 
+            if (res.ok) {
+              const data = await res.json();
+              console.log(data);
+              return account;
+            } else {
+              const errorData = await res.json();
+              console.error("Registration error:", errorData);
+            }
+
+          }
+          return true;
         } catch (error) {
           console.error("User creation error:", error);
         }
 
-        return true;
+        // return true;
       }
-      return true; // Do different verification for other providers that don't have `email_verified`
+      // return true; // Do different verification for other providers that don't have `email_verified`
     },
   },
   jwt: {

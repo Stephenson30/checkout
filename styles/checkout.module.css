@@ -303,7 +303,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid black; */
   padding-top: 30px;
   padding-bottom: 30px;
 }
