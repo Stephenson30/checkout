@@ -43,11 +43,9 @@ export default function InvoicePage() {
     setNumber(data.number);
   };
 
-
   useEffect(() => {
     getUser();
   }, [session]);
-
 
   const getBusinessDetail = async () => {
     try {
@@ -60,7 +58,7 @@ export default function InvoicePage() {
           img,
           name,
           address,
-          number
+          number,
         }),
       });
       if (res.ok) {
@@ -88,39 +86,62 @@ export default function InvoicePage() {
           // Redirect to sign-up page
           signIn("google");
         } else {
-          // Ignore sign-up suggestion and continue
+          // Ignore sign-up suggestion and continuesetIsLoading(true);
+          setIsLoading(true);
+          console.log("loading...");
+          // Simulate asynchronous operation
+          setTimeout(() => {
+            if (
+              !items ||
+              !name ||
+              !img ||
+              !address ||
+              !number ||
+              !currency ||
+              !issued ||
+              !payment
+            ) {
+              toast.error("Please complete all input details.");
+              setIsLoading(false);
+              return;
+            }
+            setIsPreview((pre) => !pre);
+            if (!isPreview) {
+              setIsLoading(false);
+              toast.success("You have sucessfully generated an invoice");
+            }
+            // Perform other actions after loading
+          }, 3000); // 3 seconds delay
         }
       });
-    }
-
-    if(session){
+    } else {
       getBusinessDetail();
-    }
 
-    setIsLoading(true);
-    console.log("loading...");
-    // Simulate asynchronous operation
-    setTimeout(() => {
-      setIsLoading(false);
-      if (
-        !items ||
-        !name ||
-        !img ||
-        !address ||
-        !number ||
-        !currency ||
-        !issued ||
-        !payment
-      ) {
-        toast.error("Please complete all input details.");
-        return;
-      }
-      setIsPreview((pre) => !pre);
-      if (!isPreview) {
-        toast.success("You have sucessfully generated an invoice");
-      }
-      // Perform other actions after loading
-    }, 3000); // 3 seconds delay
+      setIsLoading(true);
+      console.log("loading...");
+      // Simulate asynchronous operation
+      setTimeout(() => {
+        setIsLoading(false);
+        if (
+          !items ||
+          !name ||
+          !img ||
+          !address ||
+          !number ||
+          !currency ||
+          !issued ||
+          !payment
+        ) {
+          toast.error("Please complete all input details.");
+          return;
+        }
+        setIsPreview((pre) => !pre);
+        if (!isPreview) {
+          toast.success("You have sucessfully generated an invoice");
+        }
+        // Perform other actions after loading
+      }, 3000); // 3 seconds delay
+    }
   };
 
   useEffect(() => {
@@ -147,7 +168,6 @@ export default function InvoicePage() {
     };
   }, []); // Empty dependency array to run effect only once on mount
 
- 
   // Adding new input field
   const addInput = () => {
     const newItems = [...items];
@@ -187,8 +207,8 @@ export default function InvoicePage() {
           height="1.2rem"
           style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
           onClick={() => {
-            handlePreview();
-            // setIsPreview(false);
+            // handlePreview();
+            setIsPreview(false);
           }}
         />
       ) : (
@@ -232,25 +252,6 @@ export default function InvoicePage() {
         )}
 
         <ToastContainer />
-
-        {/* <div
-          className={styles.setBusinessPopUp}
-          style={{ display: !isSession ? "block" : "none" }}
-        >
-          <div className={styles.setBusinessSubPopUp}>
-            <p></p>
-            <div>
-              <button
-                onClick={() => {
-                  setIsPopUp(false);
-                }}
-                className={styles.btnCta}
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </div> */}
 
         <div className={styles.formFlex}>
           <div
@@ -423,7 +424,12 @@ export default function InvoicePage() {
                           setPayment(e.target.value);
                         }}
                       >
-                        <option defaultValue={"Bank Transfer"} value="Bank Transfer">Bank transfer</option>
+                        <option
+                          defaultValue={"Bank Transfer"}
+                          value="Bank Transfer"
+                        >
+                          Bank transfer
+                        </option>
                         <option value="Cash">Cash</option>
                         <option value="Card">Card</option>
                         <option value="Crypto">Crypto</option>
@@ -439,7 +445,9 @@ export default function InvoicePage() {
                           setCurrency(e.target.value);
                         }}
                       >
-                        <option defaultValue={"₦"} value="₦">NGN</option>
+                        <option defaultValue={"₦"} value="₦">
+                          NGN
+                        </option>
                         <option value="$">USD</option>
                         <option value="€">EUR</option>
                         <option value="¥">JPY</option>

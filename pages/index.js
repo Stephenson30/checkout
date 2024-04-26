@@ -33,7 +33,7 @@ export default function Home() {
             />
             <p>See how it works</p>
           </div>
-          <h1> Ditch the Paperwork, Get Paid Faster with Tilldesk</h1>
+          <h1> Ditch the Paperwork, Get Paid Faster with Tilldeck</h1>
           <p>
             Generate professional invoices & receipts in seconds. Simplify your
             small business finances.

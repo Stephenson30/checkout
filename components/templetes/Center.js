@@ -84,7 +84,7 @@ export default function Center({
         {/* <button onClick={()=>signOut()}>click</button> */}
         <div className={styles.header}>
           <Image
-            src={img}
+            src={img? img : "/tilldeck.svg"}
             alt="logo"
             width={40}
             height={40}
@@ -136,9 +136,9 @@ export default function Center({
                 </tr>
               ))}
               <tr>
-                <td style={{ paddingTop: "5rem" }}></td>
-                <td style={{ textAlign: "center", paddingTop: "5rem" }}></td>
-                <td style={{ textAlign: "right", paddingTop: "5rem" }}></td>
+                <td style={{ paddingTop: "6.5rem" }}></td>
+                <td style={{ textAlign: "center", paddingTop: "6.5rem" }}></td>
+                <td style={{ textAlign: "right", paddingTop: "6.5rem" }}></td>
               </tr>
               <tr className={styles.tableRow}>
                 <td style={{ color: "#5f5f5f" }}>TOTAL</td>
@@ -158,7 +158,7 @@ export default function Center({
         </div>
         <div className={styles.dot}></div>
         <div className={styles.footer}>
-          <Image src={"/Vector.svg"} alt="qrcode" width={35} height={35} />
+          <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} />
           <p>Payment validates order, Thank you. Hope to see you again.</p>
         </div>
         <div className={styles.dot}></div>

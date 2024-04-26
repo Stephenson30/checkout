@@ -64,7 +64,7 @@
   width: 30px;
   height: 30px;
   gap: 0px;
-  opacity: 0px;
+  opacity: 1px;
   border-radius: 50%;
 }
 
@@ -196,7 +196,7 @@
 .form .btnCtaAdd {
   padding: 0.9rem;
   color: #fff;
-  background: rgba(0, 0, 0, 0.877);
+  background: #b413ff ;
   font-size: 0.9rem;
   border-radius: 8px;
   gap: 8px;
