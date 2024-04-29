@@ -19,6 +19,7 @@ export default function App({
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/tilldeck.svg" />
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <SessionProvider session={session}>
           {Component.getLayout(
@@ -42,6 +43,7 @@ export default function App({
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/tilldeck.svg" />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
       <SessionProvider session={session}>
         <Header />

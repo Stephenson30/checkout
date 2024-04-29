@@ -4,11 +4,10 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { useRef } from "react";
 import { Icon } from "@iconify-icon/react";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-
 
 export default function Center({
   items,
@@ -19,14 +18,12 @@ export default function Center({
   currency,
   issued,
   payment,
-  isPreviewLarge
+  isPreviewLarge,
 }) {
-
   const [currentDateTime, setCurrentDateTime] = useState("");
   const componentRef = useRef(null);
   const { data: session } = useSession();
   const router = useRouter();
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,7 +36,6 @@ export default function Center({
     // Cleanup function to clear the interval
     return () => clearInterval(interval);
   }, [items]);
-
 
   const handleDownload = () => {
     if (!session && isPreviewLarge) {
@@ -66,12 +62,25 @@ export default function Center({
     }
   };
 
-
   const handleDownloadImage = () => {
+    // if (componentRef.current) {
+    //   html2canvas(componentRef.current).then((canvas) => {
+    //     canvas.toBlob((blob) => {
+    //       saveAs(blob, "invoice.png");
+    //     });
+    //   });
+    // }
+
     if (componentRef.current) {
       html2canvas(componentRef.current).then((canvas) => {
         canvas.toBlob((blob) => {
-          saveAs(blob, "invoice.png");
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "invoice.png");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         });
       });
     }
@@ -84,7 +93,7 @@ export default function Center({
         {/* <button onClick={()=>signOut()}>click</button> */}
         <div className={styles.header}>
           <Image
-            src={img? img : "/tilldeck.svg"}
+            src={img ? img : "/tilldeck.svg"}
             alt="logo"
             width={40}
             height={40}

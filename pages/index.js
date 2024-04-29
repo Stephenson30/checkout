@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/navigation";
+import AddToHomeScreenPrompt from "@/components/AddToHomeScreenPrompt";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +64,7 @@ export default function Home() {
             <button className={styles.transfer}>Donate via transfer</button>
           </div>
         </div>
+        <AddToHomeScreenPrompt />
       </main>
     </>
   );
