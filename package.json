@@ -24,7 +24,9 @@
     "sweetalert2": "^11.10.8"
   },
   "devDependencies": {
+    "@ducanh2912/next-pwa": "^10.2.6",
     "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "eslint-config-next": "14.1.4",
+    "webpack": "^5.91.0"
   }
 }
