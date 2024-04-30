@@ -52,6 +52,7 @@
 
 .flex > div p {
   font-size: 0.9rem;
+  color: rgb(58, 58, 58);
   /* margin-bottom: 1rem; */
 }
 

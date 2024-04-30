@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function Center({
   items,
@@ -21,6 +22,7 @@ export default function Center({
   isPreviewLarge,
 }) {
   const [currentDateTime, setCurrentDateTime] = useState("");
+  const [invoice, setInvoice] = useState("");
   const componentRef = useRef(null);
   const { data: session } = useSession();
   const router = useRouter();
@@ -63,31 +65,21 @@ export default function Center({
   };
 
   const handleDownloadImage = () => {
-    // if (componentRef.current) {
-    //   html2canvas(componentRef.current).then((canvas) => {
-    //     canvas.toBlob((blob) => {
-    //       saveAs(blob, "invoice.png");
-    //     });
-    //   });
-    // }
-
     if (componentRef.current) {
+      // Capture the component as an image using html2canvas
       html2canvas(componentRef.current).then((canvas) => {
+        // Convert the canvas to a blob
         canvas.toBlob((blob) => {
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "invoice.png");
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          // Save the blob as a PNG file
+          const saved = saveAs(blob, "invoice.png");
+          setInvoice(saved);
         });
       });
     }
   };
 
   return (
-    <div>
+    <div style={{ padding: "3rem 0" }}>
       <div className={styles.center} ref={componentRef}>
         <div className={styles.dot}></div>
         {/* <button onClick={()=>signOut()}>click</button> */}
@@ -157,7 +149,7 @@ export default function Center({
                     0
                   )}
                 </td>
-                <td style={{ textAlign: "right" }}>
+                <td style={{ textAlign: "right", fontFamily: "sans-serif" }}>
                   {currency}
                   {items.reduce((total, item) => total + Number(item.price), 0)}
                 </td>
@@ -167,13 +159,15 @@ export default function Center({
         </div>
         <div className={styles.dot}></div>
         <div className={styles.footer}>
-          <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} />
+          {/* <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} /> */}
+          <QRCodeSVG value={invoice} width={60} height={60} className={styles.image}/>
+
           <p>Payment validates order, Thank you. Hope to see you again.</p>
         </div>
         <div className={styles.dot}></div>
       </div>
       <div>
-        <button className={styles.btn} onClick={handleDownload}>
+        {/* <button className={styles.btn} onClick={handleDownload}>
           <Icon
             icon="mdi:arrow-collapse-down"
             width="1.4rem"
@@ -181,6 +175,17 @@ export default function Center({
             style={{ color: "#fff" }}
           />
           <p>Download slip</p>
+        </button> */}
+        <button className={styles.btn} onClick={handleDownload}>
+          <Icon
+            icon="mdi:arrow-collapse-down"
+            width="1.4rem"
+            height="1.4rem"
+            style={{ color: "#fff" }}
+          />
+          <a href={invoice} download={invoice}>
+            Download slip
+          </a>
         </button>
       </div>
     </div>

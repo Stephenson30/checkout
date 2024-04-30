@@ -37,15 +37,15 @@ export default function InvoicePage() {
     const res = await fetch(`/api/user/${session?.user?.email}`);
     const data = await res.json();
     // console.log(data)
-    setName(data.name);
-    setImg(data.image);
-    setAddress(data.address);
-    setNumber(data.number);
+    setName(data?.name?data?.name: name);
+    setImg(data?.image? data?.image: img);
+    setAddress(data?.address?data?.address: address);
+    setNumber(data?.number?data?.number: number);
   };
 
   useEffect(() => {
     getUser();
-  }, [session]);
+  }, []);
 
   const getBusinessDetail = async () => {
     try {
@@ -73,6 +73,10 @@ export default function InvoicePage() {
 
   // handling the preview
   const handlePreview = () => {
+    console.log(items,
+      name,
+      img,
+      address ,number,currency ,issued ,payment);
     if (!session?.user?.email) {
       Swal.fire({
         title: "Sign Up",
@@ -89,6 +93,7 @@ export default function InvoicePage() {
           // Ignore sign-up suggestion and continuesetIsLoading(true);
           setIsLoading(true);
           console.log("loading...");
+          
           // Simulate asynchronous operation
           setTimeout(() => {
             if (

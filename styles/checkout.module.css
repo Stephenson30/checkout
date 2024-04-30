@@ -323,6 +323,7 @@
   .firstFlex {
     width: 100%;
     max-width: 40%;
+    padding-bottom: 4rem;
   }
   
   .receiptSection {
