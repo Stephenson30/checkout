@@ -3,7 +3,7 @@
 .form {
   width: 100%;
   height: 100vh;
-  padding: 100px 1rem;
+  padding: 130px 1rem;
   color: black;
   font-family: "Inter", sans-serif;
 }
@@ -71,15 +71,13 @@
 .itemSection {
   padding-top: -1rem;
   width: 100%;
-  /* border: 1px solid black; */
 }
 
 .form input {
   width: 100%;
-  /* max-width: 300px; */
   padding: 0.8rem;
   border-radius: 15px;
-  border: 1px solid #cccccc;
+  border: 1.1px solid #EBEBEB;
   color: rgb(80, 80, 80);
   background: none;
   font-family: Inter;
@@ -101,7 +99,6 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  /* border: 1px solid black; */
 }
 
 .items .name {
@@ -123,7 +120,7 @@
   padding: 0.5rem;
   border-radius: 8px;
   gap: 8px;
-  border: 1px solid #c2c2c2;
+  border: 1.1px solid #EBEBEB;
   background: none;
   transition: all 0.3s;
   font-family: Inter;
@@ -147,23 +144,17 @@
 .dropzone {
   width: 75px;
   height: 75px;
-  background: #e9e9e9;
-  border-radius: 15px;
+  background: #ffffff;
+  border: 1.1px solid #EBEBEB;
+  border-radius: 100%;
   display: flex;
-}
-
-.dropzone .icon {
-  /* width: 100px; */
-  /* height: 0%; */
-  display: block;
-  margin: 0 auto;
-  /* font-size: 1rem; */
-  /* align-self: flex-end; */
+  justify-content: center;
+  align-items: center;
 }
 
 .dropzone label {
-  width: 75%;
-  height: 75%;
+  width: 65%;
+  height: 65%;
 }
 
 .dropzone input {
@@ -171,11 +162,12 @@
 }
 
 .dropzone .image {
-  width: 75px;
-  height: 85px;
+  width: 100%;
+  max-width: 46px;
+  height: 46px;
   margin: 0 auto;
   display: block;
-  margin-top: -8px;
+  border-radius: 100%;
 }
 
 .form .flex .btnCta {
@@ -205,7 +197,6 @@
 }
 
 .currency {
-  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -218,7 +209,7 @@
 .currency select {
   padding: 0.5rem;
   border-radius: 15px;
-  border: 1px solid #ebebeb;
+  border: 1.1px solid #EBEBEB;
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -291,8 +282,6 @@
 .formFlex {
   width: 100%;
   margin: 0 auto;
-  /* border: 1px solid black; */
-  /* padding: 0 6rem; */
 }
 
 .receiptSection {

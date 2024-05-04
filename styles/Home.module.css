@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
-
 .main {
   display: flex;
   flex-direction: column;
@@ -95,10 +94,10 @@
   background: #c344ff;
   display: block;
   margin: 0 auto;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-.firstSection button:hover{
+.firstSection button:hover {
   transform: scale(1.1);
 }
 
@@ -148,7 +147,7 @@
 
 .secondSection div button {
   width: 100%;
-  max-width: 125px;
+  max-width: 135px;
   padding: 13px 9px;
   border-radius: 7px;
   border: 0.57px solid #ebebeb;
@@ -171,6 +170,58 @@
   margin: 0 auto;
   width: 50px;
   height: 50px;
+}
+
+/* Modal.css */
+.modalContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgb(116, 116, 116, .9);
+  /* max-width: 500px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
+  /* border-radius: 8px; */
+}
+
+
+.modalContent {
+  background-color: rgb(255, 255, 255);
+  padding: 1rem;
+  transform: translateY(50%);
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px ;
+}
+
+.modalContent .Image {
+  display: block;
+  margin: 0 auto;
+}
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  padding: .5rem 1rem;
+  border: .8px solid gainsboro;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (min-width: 850px) {
@@ -310,7 +361,7 @@
 
   .secondSection div button {
     width: 100%;
-    max-width: 175px;
+    max-width: 180px;
     padding: 19px 10px;
     border-radius: 14px;
     border: 0.9px solid #ebebeb;

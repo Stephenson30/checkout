@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-import { QRCodeSVG } from "qrcode.react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Center({
   items,
@@ -55,6 +55,20 @@ export default function Center({
           signIn("google");
         } else {
           // Ignore sign-up suggestion and continue
+          if (
+            !items ||
+            !name ||
+            !img ||
+            !address ||
+            !number ||
+            !currency ||
+            !issued ||
+            !payment
+          ) {
+            toast.error("Please complete all input details.");
+            return;
+          }
+
           handleDownloadImage();
         }
       });
@@ -71,12 +85,27 @@ export default function Center({
         // Convert the canvas to a blob
         canvas.toBlob((blob) => {
           // Save the blob as a PNG file
-          const saved = saveAs(blob, "invoice.png");
-          setInvoice(saved);
+          saveAs(blob, "invoice.png");
+          // Ping users
+          toast.success("You have sucessfully downloaded an invoice");
         });
       });
     }
   };
+
+  // Function to truncate string to a specified number of letters
+  const truncateString = (str, maxLength) => {
+    if (str.length > maxLength) {
+      return str.slice(0, maxLength) + "...";
+    } else {
+      return str;
+    }
+  };
+
+  // Truncate the name to 3 words
+  const truncatedName = truncateString(name, 25);
+  const truncatedAddress = truncateString(address, 26);
+  const truncatedNumber = truncateString(number, 23);
 
   return (
     <div style={{ padding: "3rem 0" }}>
@@ -91,9 +120,9 @@ export default function Center({
             height={40}
             className={styles.logo}
           />
-          <h3>{name}</h3>
-          <p>{address}</p>
-          <p>{number}</p>
+          <h3>{truncatedName}</h3>
+          <p>{truncatedAddress}</p>
+          <p>{truncatedNumber}</p>
         </div>
         <div className={styles.dot}></div>
         <div className={styles.client}>
@@ -159,8 +188,8 @@ export default function Center({
         </div>
         <div className={styles.dot}></div>
         <div className={styles.footer}>
-          {/* <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} /> */}
-          <QRCodeSVG value={invoice} width={60} height={60} className={styles.image}/>
+          <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} />
+          {/* <QRCodeSVG value={invoice} width={60} height={60} className={styles.image}/> */}
 
           <p>Payment validates order, Thank you. Hope to see you again.</p>
         </div>
@@ -183,7 +212,7 @@ export default function Center({
             height="1.4rem"
             style={{ color: "#fff" }}
           />
-          <a href={invoice} download={invoice}>
+          <a href={null} download={null}>
             Download slip
           </a>
         </button>

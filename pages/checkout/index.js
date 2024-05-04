@@ -25,7 +25,7 @@ export default function InvoicePage() {
   const [isPopUp, setIsPopUp] = useState(false);
   const [isSession, setIsSession] = useState(true);
   const [payment, setPayment] = useState("Bank Transfer");
-  const [toggle, setToggle] = useState(false);
+  const [toggled, setToggled] = useState(false);
   const [toggleItem, setToggleItem] = useState(true);
   const [isPreview, setIsPreview] = useState(false);
   const [isPreviewLarge, setIsPreviewLarge] = useState(false);
@@ -62,7 +62,6 @@ export default function InvoicePage() {
         }),
       });
       if (res.ok) {
-        // alert("Updated successfully");
         const message = await res.json();
         console.log(message.message);
       }
@@ -73,10 +72,6 @@ export default function InvoicePage() {
 
   // handling the preview
   const handlePreview = () => {
-    console.log(items,
-      name,
-      img,
-      address ,number,currency ,issued ,payment);
     if (!session?.user?.email) {
       Swal.fire({
         title: "Sign Up",
@@ -113,8 +108,8 @@ export default function InvoicePage() {
             setIsPreview((pre) => !pre);
             if (!isPreview) {
               setIsLoading(false);
-              toast.success("You have sucessfully generated an invoice");
             }
+            toast.success("You have sucessfully generated an invoice");
             // Perform other actions after loading
           }, 3000); // 3 seconds delay
         }
@@ -297,7 +292,7 @@ export default function InvoicePage() {
                     />
                     <p>SLIP DETAILS</p>
                   </div>
-                  {toggle ? (
+                  {toggled ? (
                     <Icon
                       icon="mingcute:up-line"
                       width="1.2rem"
@@ -309,7 +304,7 @@ export default function InvoicePage() {
                         padding: ".1rem",
                       }}
                       onClick={() => {
-                        setToggle(false);
+                        setToggled(false);
                         setToggleItem(true);
                       }}
                     />
@@ -325,13 +320,13 @@ export default function InvoicePage() {
                         padding: ".1rem",
                       }}
                       onClick={() => {
-                        setToggle(true);
+                        setToggled(true);
                         setToggleItem(false);
                       }}
                     />
                   )}
                 </div>
-                <div style={{ display: toggle ? "none" : "block" }}>
+                <div style={{ display: toggled ? "none" : "block" }}>
                   <div className={styles.logo}>
                     <div className={styles.inputContainer}>
                       <label>Business name</label>
@@ -353,12 +348,7 @@ export default function InvoicePage() {
                             height={100}
                           />
                         ) : (
-                          <Icon
-                            icon="ph:image"
-                            className={styles.icon}
-                            width="4.5rem"
-                            height="4.5rem"
-                          />
+                          <p style={{textAlign:"center", fontSize:"16px", color:"#c344ff"}}>Add Logo</p>
                         )}
                       </label>
                       <input
@@ -540,7 +530,7 @@ export default function InvoicePage() {
                       }}
                       onClick={() => {
                         setToggleItem(false);
-                        setToggle(true);
+                        setToggled(true);
                       }}
                     />
                   ) : (
@@ -556,7 +546,7 @@ export default function InvoicePage() {
                       }}
                       onClick={() => {
                         setToggleItem(true);
-                        setToggle(false);
+                        setToggled(false);
                       }}
                     />
                   )}
@@ -567,7 +557,7 @@ export default function InvoicePage() {
                     <div
                       key={index}
                       style={{
-                        borderBottom: "1px dashed gray",
+                        borderBottom: "1.1px solid #EBEBEB",
                         paddingBottom: "2rem",
                         paddingTop: "2rem",
                       }}

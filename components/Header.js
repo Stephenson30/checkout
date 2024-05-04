@@ -36,21 +36,13 @@ export default function Header() {
           <p>Not signed in</p>
           <button
             onClick={() => signIn("google")}
-            style={{ background: "none", fontWeight: "bold" }}
+            style={{ background: "none", border:"none" }}
           >
-            Log in
+            Login
           </button>
           <button onClick={() => signIn("google")}>Sign up</button>
         </div>
       )}
-
-      {/* <Icon
-        icon="mdi:menu"
-        width="1.5rem"
-        height="1.5rem"
-        style={{ color: "black"}}
-        className={styles.menu}
-      /> */}
     </div>
   );
 }
