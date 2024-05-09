@@ -29,8 +29,8 @@ const EthereumAddress = ({ address }) => {
       <Image src={"/code.png"} alt="qrcode transfer" width={200} height={200} style={{
         margin: "0 auto", display:"block"
       }}/>
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"5px", width:"100%", position:"relative"}}>
-        <p style={{fontSize:".6em", background:"rgb(173, 216, 230, 0.4)", padding:".4em", borderRadius:"15px", width:"fitContent"}}>{address}</p><br/>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"5px", width:"100%", position:"relative", fontWeight:"bold"}}>
+        <p style={{fontSize:".8em", background:"rgb(173, 216, 230, 0.4)", padding:".4em", borderRadius:"15px", width:"fitContent"}}>{address}</p><br/>
         <button onClick={copyToClipboard} style={{padding:".5em", background:"#9c00e5", color:"#fff",border:"none",borderRadius:"8px", cursor:"pointer"}}>{copied ? "Copied!" : "Copy"}</button>
       </div>
     </div>

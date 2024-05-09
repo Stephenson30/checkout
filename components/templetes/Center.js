@@ -159,7 +159,7 @@ export default function Center({
                 <tr key={index}>
                   <td>{item.name}</td>
                   <td style={{ textAlign: "center" }}>{item.quantity}</td>
-                  <td style={{ textAlign: "right" }}>
+                  <td style={{ textAlign: "right", display:"flex", justifyContent:"flex-end" }}>
                     <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                     {item.price}
                   </td>
@@ -178,7 +178,7 @@ export default function Center({
                     0
                   )}
                 </td>
-                <td style={{ textAlign: "right" }}>
+                <td style={{ textAlign: "right", display:"flex", justifyContent:"flex-end" }}>
                   <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                   {items.reduce((total, item) => total + Number(item.price), 0)}
                 </td>

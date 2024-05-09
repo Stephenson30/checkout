@@ -5,10 +5,10 @@
   font-optical-sizing: auto;
   background: #fff;
   width: 100%;
-  max-width: 350px;
+  max-width: 365px;
   padding: 0.5rem 1rem;
-  margin-bottom: 2rem;
   border: 1px solid #eaeaea;
+  margin: 0 auto;
 }
 
 .dot {
@@ -138,16 +138,20 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: last baseline;
   gap: 5px;
   font-family: Inter;
   line-height: 18.15px;
   letter-spacing: -0.26301372051239014px;
+  font-size: 18px;
+  gap: 8px;
+  margin-top: 2rem;
+
 }
 
 .btn .icon {
-  width: 12.5px;
-  height: 12.5px;
+  width: 13.5px;
+  height: 13.5px;
 }
 
 

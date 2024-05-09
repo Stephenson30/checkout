@@ -241,9 +241,9 @@
   left: 0;
   bottom: 0;
   height: 100vh;
-  background: grey;
+  background: rgb(255, 255, 255);
   width: 100%;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .setBusinessPopUp p {

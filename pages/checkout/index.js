@@ -166,7 +166,7 @@ export default function InvoicePage() {
     return () => {
       window.removeEventListener("resize", updatePreview);
     };
-  }, []); // Empty dependency array to run effect only once on mount
+  }, [1]); // Empty dependency array to run effect only once on mount
 
   // Adding new input field
   const addInput = () => {
