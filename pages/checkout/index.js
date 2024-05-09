@@ -37,10 +37,10 @@ export default function InvoicePage() {
     const res = await fetch(`/api/user/${session?.user?.email}`);
     const data = await res.json();
     // console.log(data)
-    setName(data?.name?data?.name: name);
-    setImg(data?.image? data?.image: img);
-    setAddress(data?.address?data?.address: address);
-    setNumber(data?.number?data?.number: number);
+    setName(data?.name ? data?.name : name);
+    setImg(data?.image ? data?.image : img);
+    setAddress(data?.address ? data?.address : address);
+    setNumber(data?.number ? data?.number : number);
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function InvoicePage() {
           // Ignore sign-up suggestion and continuesetIsLoading(true);
           setIsLoading(true);
           console.log("loading...");
-          
+
           // Simulate asynchronous operation
           setTimeout(() => {
             if (
@@ -202,25 +202,28 @@ export default function InvoicePage() {
     <div className={styles.form}>
       {isPreview && !isPreviewLarge ? (
         <Icon
-          icon="entypo:back"
-          width="1.2rem"
-          height="1.2rem"
-          style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
+          icon="material-symbols-light:arrow-back-ios"
+          width="1rem"
+          height="1rem"
+          style={{ color: "black", margin:"0 auto"}}
+          className={styles.icon}
           onClick={() => {
             // handlePreview();
             setIsPreview(false);
           }}
         />
       ) : (
-        <Icon
-          icon="entypo:back"
-          width="1.2rem"
-          height="1.2rem"
-          style={{ color: "black", margin: "-4rem 0 1rem 1rem" }}
-          onClick={() => {
-            router.replace("/");
-          }}
-        />
+        <div onClick={() => {
+              router.replace("/");
+            }}
+            className={styles.icon}>
+          <Icon
+            icon="material-symbols-light:arrow-back-ios"
+            width="1rem"
+            height="1rem"
+            style={{ color: "black", margin:"0 auto", display:"block" }}
+          />
+        </div>
       )}
       <div>
         <div>
@@ -268,13 +271,13 @@ export default function InvoicePage() {
             }}
           >
             <form>
-              <div className={styles.business}>
+              <div className={styles.business} >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    padding: "2rem 0 0",
+                    padding: "0 0 0",
                   }}
                 >
                   <div
@@ -282,6 +285,10 @@ export default function InvoicePage() {
                       display: "flex",
                       alignItems: "center",
                       gap: "2px",
+                    }}
+                    onClick={() => {
+                      setToggled(true);
+                      setToggleItem(false);
                     }}
                   >
                     <Icon
@@ -319,10 +326,6 @@ export default function InvoicePage() {
                         borderRadius: "50%",
                         padding: ".1rem",
                       }}
-                      onClick={() => {
-                        setToggled(true);
-                        setToggleItem(false);
-                      }}
                     />
                   )}
                 </div>
@@ -348,7 +351,15 @@ export default function InvoicePage() {
                             height={100}
                           />
                         ) : (
-                          <p style={{textAlign:"center", fontSize:"16px", color:"#c344ff"}}>Add Logo</p>
+                          <p
+                            style={{
+                              textAlign: "center",
+                              fontSize: "14px",
+                              color: "#c344ff",
+                            }}
+                          >
+                            Add Logo
+                          </p>
                         )}
                       </label>
                       <input
@@ -501,6 +512,11 @@ export default function InvoicePage() {
                     justifyContent: "space-between",
                     padding: "2rem 0",
                   }}
+                  onClick={() => {
+                    setToggleItem(false);
+                    setToggled(true);
+                  }}
+
                 >
                   <div
                     style={{
@@ -527,10 +543,6 @@ export default function InvoicePage() {
                         border: "1px solid #888888",
                         borderRadius: "50%",
                         padding: ".1rem",
-                      }}
-                      onClick={() => {
-                        setToggleItem(false);
-                        setToggled(true);
                       }}
                     />
                   ) : (

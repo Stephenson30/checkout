@@ -3,7 +3,7 @@
 .form {
   width: 100%;
   height: 100vh;
-  padding: 130px 1rem;
+  padding: 6rem 1rem;
   color: black;
   font-family: "Inter", sans-serif;
 }
@@ -15,7 +15,7 @@
 .business p,
 .p {
   font-family: Inter;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 18.15px;
   letter-spacing: -0.30000001192092896px;
@@ -77,7 +77,7 @@
   width: 100%;
   padding: 0.8rem;
   border-radius: 15px;
-  border: 1.1px solid #EBEBEB;
+  border: 1.1px solid #ebebeb;
   color: rgb(80, 80, 80);
   background: none;
   font-family: Inter;
@@ -88,10 +88,10 @@
   text-align: left;
 }
 
-.form input:focus{
-  border: 1.1px solid #C344FF;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 0px 0px #C344FF;
+.form input:focus {
+  border: 1.1px solid #c344ff;
+  background: #ffffff;
+  box-shadow: 0px 0px 0px 3px #F5E0FF;
 }
 
 .items {
@@ -120,7 +120,7 @@
   padding: 0.5rem;
   border-radius: 8px;
   gap: 8px;
-  border: 1.1px solid #EBEBEB;
+  border: 1.1px solid #ebebeb;
   background: none;
   transition: all 0.3s;
   font-family: Inter;
@@ -143,9 +143,9 @@
 
 .dropzone {
   width: 75px;
-  height: 75px;
+  height: 65px;
   background: #ffffff;
-  border: 1.1px solid #EBEBEB;
+  border: 1.1px solid #ebebeb;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -163,18 +163,17 @@
 
 .dropzone .image {
   width: 100%;
-  max-width: 46px;
-  height: 46px;
+  max-width: 42px;
+  height: 42px;
   margin: 0 auto;
   display: block;
   border-radius: 100%;
 }
 
 .form .flex .btnCta {
-  padding: .65rem 2rem;
+  padding: 0.65rem 2rem;
   gap: 2px;
   border-radius: 10px;
-  border: none;
   font-family: Inter;
   font-size: 14px;
   font-weight: 500;
@@ -182,18 +181,18 @@
   letter-spacing: 0.26301372051239014px;
   text-align: center;
   color: #fff;
-  background: #c344ff ;
+  background: #c344ff;
+  border: 0.6px solid #9C00E5
 }
 
 .form .btnCtaAdd {
   padding: 0.9rem;
   color: #fff;
-  background: #b413ff ;
+  background: #b413ff;
   font-size: 0.9rem;
   border-radius: 8px;
   gap: 8px;
   font-weight: 600;
-  /* margin-left: 300px; */
 }
 
 .currency {
@@ -209,7 +208,7 @@
 .currency select {
   padding: 0.5rem;
   border-radius: 15px;
-  border: 1.1px solid #EBEBEB;
+  border: 1.1px solid #ebebeb;
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -296,8 +295,21 @@
   padding-bottom: 30px;
 }
 
-@media (min-width: 750px) {
+.icon {
+  width: fit-content;
+  height: fit-content;
+  padding: 0.4rem;
+  border-radius: 50%;
+  border: 0.9px solid rgb(223, 223, 223);
+  margin-bottom: 2rem;
+}
 
+.image {
+  width: 50px;
+  height: 50px;
+}
+
+@media (min-width: 750px) {
   .formFlex {
     display: flex;
     justify-content: center;
@@ -309,19 +321,57 @@
     margin-top: 0;
   }
 
+  .dropzone {
+    width: 75px;
+    height: 75px;
+    background: #ffffff;
+    border: 1.1px solid #ebebeb;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dropzone label {
+    width: 65%;
+    height: 65%;
+  }
+
+  .dropzone input {
+    display: none;
+  }
+
+  .dropzone .image {
+    width: 100%;
+    max-width: 46px;
+    height: 46px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 100%;
+  }
+
+  .icon {
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+  }
+
   .firstFlex {
     width: 100%;
     max-width: 40%;
-    padding-bottom: 4rem;
+    margin-top: 0;
+    align-self: center;
   }
-  
+
   .receiptSection {
     padding-top: 0;
     margin-top: 0;
     width: 100%;
-    max-width: 350px;
+    max-width: 40%;
     overflow-y: unset;
-    padding-bottom: 3rem;
+    border-left: 1px solid #EAEAEA;
+    padding-left: 6rem;
+    background: #FAFAFA;
   }
 
   .receipt {
@@ -342,5 +392,4 @@
     max-width: 371px;
     opacity: 1;
   }
-
 }

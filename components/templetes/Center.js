@@ -160,7 +160,7 @@ export default function Center({
                   <td>{item.name}</td>
                   <td style={{ textAlign: "center" }}>{item.quantity}</td>
                   <td style={{ textAlign: "right" }}>
-                    {currency}
+                    <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                     {item.price}
                   </td>
                 </tr>
@@ -178,8 +178,8 @@ export default function Center({
                     0
                   )}
                 </td>
-                <td style={{ textAlign: "right", fontFamily: "sans-serif" }}>
-                  {currency}
+                <td style={{ textAlign: "right" }}>
+                  <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                   {items.reduce((total, item) => total + Number(item.price), 0)}
                 </td>
               </tr>
@@ -189,28 +189,16 @@ export default function Center({
         <div className={styles.dot}></div>
         <div className={styles.footer}>
           <Image src={"/Vector.svg"} alt="qrcode" width={32} height={32} />
-          {/* <QRCodeSVG value={invoice} width={60} height={60} className={styles.image}/> */}
-
           <p>Payment validates order, Thank you. Hope to see you again.</p>
         </div>
         <div className={styles.dot}></div>
       </div>
       <div>
-        {/* <button className={styles.btn} onClick={handleDownload}>
-          <Icon
-            icon="mdi:arrow-collapse-down"
-            width="1.4rem"
-            height="1.4rem"
-            style={{ color: "#fff" }}
-          />
-          <p>Download slip</p>
-        </button> */}
         <button className={styles.btn} onClick={handleDownload}>
           <Icon
             icon="mdi:arrow-collapse-down"
-            width="1.4rem"
-            height="1.4rem"
             style={{ color: "#fff" }}
+            className={styles.icon}
           />
           <a href={null} download={null}>
             Download slip
