@@ -24,8 +24,8 @@
 }
 
 .logo input {
-  margin-top: 1rem;
-  max-width: 350px;
+  /* margin-top: 1rem; */
+  max-width: 340px;
   width: 100%;
   color: black;
 }
@@ -69,7 +69,8 @@
 }
 
 .itemSection {
-  padding-top: -1rem;
+  /* padding-top: -1rem; */
+  padding-bottom: 2rem;
   width: 100%;
 }
 
@@ -291,7 +292,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 10px;
   padding-bottom: 30px;
 }
 
@@ -309,11 +310,11 @@
   height: 50px;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 850px) {
   .formFlex {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-start;
     width: 100%;
     gap: 100px;
     margin: 0 auto;
@@ -322,8 +323,8 @@
   }
 
   .dropzone {
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     background: #ffffff;
     border: 1.1px solid #ebebeb;
     border-radius: 100%;
@@ -332,10 +333,10 @@
     align-items: center;
   }
 
-  .dropzone label {
+  /* .dropzone label {
     width: 65%;
     height: 65%;
-  }
+  } */
 
   .dropzone input {
     display: none;
@@ -356,21 +357,28 @@
     cursor: pointer;
   }
 
+  .firstcontainer{
+    width: 100%;
+    max-width: 50%;
+  }
+
   .firstFlex {
     width: 100%;
-    max-width: 40%;
+    max-width: 85%;
+    margin: 0 auto;
     margin-top: 0;
-    align-self: center;
+    align-self: flex-start;
+
   }
 
   .receiptSection {
     padding-top: 0;
     margin-top: 0;
     width: 100%;
-    max-width: 40%;
+    max-width: 50%;
     overflow-y: unset;
     border-left: 1px solid #EAEAEA;
-    padding-left: 6rem;
+    /* padding-left: 6rem; */
     background: #FAFAFA;
   }
 
@@ -391,5 +399,14 @@
   .setBusinessSubPopUp {
     max-width: 371px;
     opacity: 1;
+  }
+
+  .btn{
+    margin-left: 2.5rem;
+  }
+
+  .itemSection {
+    max-width: 470px;
+    margin: 0 auto;
   }
 }

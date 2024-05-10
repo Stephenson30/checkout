@@ -22,7 +22,7 @@ export default function Center({
   isPreviewLarge,
 }) {
   const [currentDateTime, setCurrentDateTime] = useState("");
-  const [invoice, setInvoice] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const componentRef = useRef(null);
   const { data: session } = useSession();
   const router = useRouter();
@@ -40,6 +40,8 @@ export default function Center({
   }, [items]);
 
   const handleDownload = () => {
+    setIsDisabled(true);
+    console.log("click handleDownload");
     if (!session && isPreviewLarge) {
       // If user is not signed in, display a popup suggesting sign-up
       Swal.fire({
@@ -79,6 +81,8 @@ export default function Center({
   };
 
   const handleDownloadImage = () => {
+    console.log("click handleDownloadImage");
+
     if (componentRef.current) {
       // Capture the component as an image using html2canvas
       html2canvas(componentRef.current).then((canvas) => {
@@ -88,6 +92,7 @@ export default function Center({
           saveAs(blob, "invoice.png");
           // Ping users
           toast.success("You have sucessfully downloaded an invoice");
+          setIsDisabled(false);
         });
       });
     }
@@ -108,7 +113,7 @@ export default function Center({
   const truncatedNumber = truncateString(number, 23);
 
   return (
-    <div style={{ padding: "3rem 0" }}>
+    <div className={styles.centercontainer}>
       <div className={styles.center} ref={componentRef}>
         <div className={styles.dot}></div>
         {/* <button onClick={()=>signOut()}>click</button> */}
@@ -159,7 +164,13 @@ export default function Center({
                 <tr key={index}>
                   <td>{item.name}</td>
                   <td style={{ textAlign: "center" }}>{item.quantity}</td>
-                  <td style={{ textAlign: "right", display:"flex", justifyContent:"flex-end" }}>
+                  <td
+                    style={{
+                      textAlign: "right",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
                     <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                     {item.price}
                   </td>
@@ -178,7 +189,13 @@ export default function Center({
                     0
                   )}
                 </td>
-                <td style={{ textAlign: "right", display:"flex", justifyContent:"flex-end" }}>
+                <td
+                  style={{
+                    textAlign: "right",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
                   <span style={{ fontFamily: "sans-serif" }}>{currency}</span>
                   {items.reduce((total, item) => total + Number(item.price), 0)}
                 </td>
@@ -194,7 +211,15 @@ export default function Center({
         <div className={styles.dot}></div>
       </div>
       <div>
-        <button className={styles.btn} onClick={handleDownload}>
+        <button
+          className={styles.btn}
+          onClick={handleDownload}
+          disabled={!isDisabled ? false : true}
+          style={{
+            background: !isDisabled ? "#c344ff" : "#ecc2ff",
+            display: !isDisabled ? "flex" : "none",
+          }}
+        >
           <Icon
             icon="mdi:arrow-collapse-down"
             style={{ color: "#fff" }}
