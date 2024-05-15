@@ -429,82 +429,86 @@ export default function InvoicePage() {
                       <div>
                         <label>Payment type</label>
                         <br />
-                        <select
-                          // style={{padding: ".3rem 0"}}
-                          id="paymentSelect"
-                          onChange={(e) => {
-                            setPayment(e.target.value);
-                          }}
-                        >
-                          <option
-                            defaultValue={"Bank Transfer"}
-                            value="Bank Transfer"
+                        <div className={styles.custom_select}>
+                          <select
+                            style={{paddingRight: "2.2rem"}}
+                            id="paymentSelect"
+                            onChange={(e) => {
+                              setPayment(e.target.value);
+                            }}
                           >
-                            Bank transfer
-                          </option>
-                          <option value="Cash">Cash</option>
-                          <option value="Card">Card</option>
-                          <option value="Crypto">Crypto</option>
-                        </select>
+                            <option
+                              defaultValue={"Bank Transfer"}
+                              value="Bank Transfer"
+                            >
+                              Bank transfer
+                            </option>
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="Crypto">Crypto</option>
+                          </select>
+                        </div>
                       </div>
                       <div>
                         <label>Currency</label>
                         <br />
-                        <select
-                          id="currencySelect"
-                          onChange={(e) => {
-                            if (e.target.value === "") setIsPopUp(true);
-                            setCurrency(e.target.value);
-                          }}
-                        >
-                          <option defaultValue={"₦"} value="₦">
-                            NGN
-                          </option>
-                          <option value="$">USD</option>
-                          <option value="€">EUR</option>
-                          <option value="¥">JPY</option>
-                          <option value="£">GBP</option>
-                          <option value="A$">AUD</option>
-                          <option value="C$">CAD</option>
-                          <option value="Fr">CHF</option>
-                          <option value="¥">CNY</option>
-                          <option value="kr">SEK</option>
-                          <option value="NZ$">NZD</option>
-                          <option value="₹">INR</option>
-                          <option value="R">ZAR</option>
-                          <option value="E£">EGP</option>
-                          <option value="KSh">KES</option>
-                          <option value="د.ج">DZD</option>
-                          <option value="DH">MAD</option>
-                          <option value="GH₵">GHS</option>
-                          <option value="DT">TND</option>
-                          <option value="Kz">AOA</option>
-                          <option value="USh">UGX</option>
-                          <option value="₡">CRC</option>
-                          <option value="₱">PHP</option>
-                          <option value="₫">VND</option>
-                          <option value="₪">ILS</option>
-                          <option value="₺">TRY</option>
-                          <option value="Rp">IDR</option>
-                          <option value="RM">MYR</option>
-                          <option value="₽">RUB</option>
-                          <option value="Br">BRL</option>
-                          <option value="CLP$">CLP</option>
-                          <option value="COP$">COP</option>
-                          <option value="S/">PEN</option>
-                          <option value="KD">KWD</option>
-                          <option value="Ft">HUF</option>
-                          <option value="₴">UAH</option>
-                          <option value="QAR">QAR</option>
-                          <option value="NT$">TWD</option>
-                          <option value="lei">RON</option>
-                          <option value="ARS$">ARS</option>
-                          <option value="JD">JOD</option>
-                          <option value="BD">BHD</option>
-                          <option value="﷼">SAR</option>
-                          <option value="">OTHERS</option>
-                          {/* <!-- Add more options for other currencies --> */}
-                        </select>
+                        <div className={styles.custom_select}>
+                          <select
+                            id="currencySelect"
+                            onChange={(e) => {
+                              if (e.target.value === "") setIsPopUp(true);
+                              setCurrency(e.target.value);
+                            }}
+                          >
+                            <option defaultValue={"₦"} value="₦">
+                              NGN
+                            </option>
+                            <option value="$">USD</option>
+                            <option value="€">EUR</option>
+                            <option value="¥">JPY</option>
+                            <option value="£">GBP</option>
+                            <option value="A$">AUD</option>
+                            <option value="C$">CAD</option>
+                            <option value="Fr">CHF</option>
+                            <option value="¥">CNY</option>
+                            <option value="kr">SEK</option>
+                            <option value="NZ$">NZD</option>
+                            <option value="₹">INR</option>
+                            <option value="R">ZAR</option>
+                            <option value="E£">EGP</option>
+                            <option value="KSh">KES</option>
+                            <option value="د.ج">DZD</option>
+                            <option value="DH">MAD</option>
+                            <option value="GH₵">GHS</option>
+                            <option value="DT">TND</option>
+                            <option value="Kz">AOA</option>
+                            <option value="USh">UGX</option>
+                            <option value="₡">CRC</option>
+                            <option value="₱">PHP</option>
+                            <option value="₫">VND</option>
+                            <option value="₪">ILS</option>
+                            <option value="₺">TRY</option>
+                            <option value="Rp">IDR</option>
+                            <option value="RM">MYR</option>
+                            <option value="₽">RUB</option>
+                            <option value="Br">BRL</option>
+                            <option value="CLP$">CLP</option>
+                            <option value="COP$">COP</option>
+                            <option value="S/">PEN</option>
+                            <option value="KD">KWD</option>
+                            <option value="Ft">HUF</option>
+                            <option value="₴">UAH</option>
+                            <option value="QAR">QAR</option>
+                            <option value="NT$">TWD</option>
+                            <option value="lei">RON</option>
+                            <option value="ARS$">ARS</option>
+                            <option value="JD">JOD</option>
+                            <option value="BD">BHD</option>
+                            <option value="﷼">SAR</option>
+                            <option value="">OTHERS</option>
+                            {/* <!-- Add more options for other currencies --> */}
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>

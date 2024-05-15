@@ -92,7 +92,7 @@
 .form input:focus {
   border: 1.1px solid #c344ff;
   background: #ffffff;
-  box-shadow: 0px 0px 0px 3px #F5E0FF;
+  box-shadow: 0px 0px 0px 3px #f5e0ff;
 }
 
 .items {
@@ -183,7 +183,7 @@
   text-align: center;
   color: #fff;
   background: #c344ff;
-  border: 0.6px solid #9C00E5
+  border: 0.6px solid #9c00e5;
 }
 
 .form .btnCtaAdd {
@@ -207,7 +207,8 @@
 }
 
 .currency select {
-  padding: 0.5rem;
+  padding: 0.6rem;
+  width: 100%;
   border-radius: 15px;
   border: 1.1px solid #ebebeb;
   font-family: Inter;
@@ -221,11 +222,11 @@
   color: #9d9d9d;
   display: inline-block;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22%23000%22 d%3D%22M2 OLO 2h4L2 OzM2 512-2HO12 2z%22/%3E%3C/svg%3E') no-repeat right 10px center;
-  background-color: #fff;
-  background-size: 10px;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAMAAACtdX32AAAAdVBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhMdQaAAAAJ3RSTlMAAAECAwQGBwsOFBwkJTg5RUZ4eYCHkJefpaytrsXGy8zW3+Do8vNn0bsyAAAAYElEQVR42tXROwJDQAAA0Ymw1p9kiT+L5P5HVEi3qJn2lcPjtIuzUIJ/rhIGy762N3XaThqMN1ZPALsZPEzG1x8LrFL77DHBnEMxBewz0fJ6LyFHTPL7xhwzWYrJ9z22AqmQBV757MHfAAAAAElFTkSuQmCC);
+  background-position: 100%;
+  background-repeat: no-repeat;
 }
 
 .currency select::-ms-expand {
@@ -368,7 +369,7 @@
     cursor: pointer;
   }
 
-  .firstcontainer{
+  .firstcontainer {
     width: 100%;
     max-width: 50%;
   }
@@ -379,7 +380,6 @@
     margin: 0 auto;
     margin-top: 0;
     align-self: flex-start;
-
   }
 
   .receiptSection {
@@ -388,9 +388,9 @@
     width: 100%;
     max-width: 50%;
     overflow-y: unset;
-    border-left: 1px solid #EAEAEA;
+    border-left: 1px solid #eaeaea;
     /* padding-left: 6rem; */
-    background: #FAFAFA;
+    background: #fafafa;
   }
 
   .receipt {
@@ -412,7 +412,7 @@
     opacity: 1;
   }
 
-  .btn{
+  .btn {
     margin-left: 2.5rem;
   }
 

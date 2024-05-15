@@ -2,15 +2,17 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import styles from "@/components/styles.module.css";
 import Image from "next/image";
 import { Icon } from "@iconify-icon/react";
+import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 export default function Header() {
   const { data: session } = useSession();
-
+const router = useRouter()
   //   console.log(session?.user?.image)
 
   return (
     <div className={styles.Header}>
-      <div className={styles.logoName}>
+      <div className={styles.logoName} onClick={()=> router.replace('/')}>
         <Image
           src={"/tilldeck.svg"}
           alt="logo"
@@ -19,7 +21,7 @@ export default function Header() {
           className={styles.logo}
         />
         <Image
-          src={"/TilldeskTest.svg"}
+          src={"/TilldeckTest.svg"}
           alt="logo"
           width={87.37}
           height={18.2}
@@ -36,7 +38,7 @@ export default function Header() {
           <p>Not signed in</p>
           <button
             onClick={() => signIn("google")}
-            style={{ background: "none", border:"none" }}
+            style={{ background: "none", border:"none", cursor:"pointer" }}
           >
             Login
           </button>
