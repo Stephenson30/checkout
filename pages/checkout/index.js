@@ -207,7 +207,7 @@ export default function InvoicePage() {
           height="1.4rem"
           style={{
             color: "#888888",
-            border: "1px solid #888888",
+            border: "1px solid #ebebeb",
             borderRadius: "50%",
             padding: ".1rem",
             transform: "rotate(270deg)",
@@ -224,7 +224,7 @@ export default function InvoicePage() {
           height="1.4rem"
           style={{
             color: "#888888",
-            border: "1px solid #888888",
+            border: "1px solid #ebebeb",
             borderRadius: "50%",
             padding: ".1rem",
             transform: "rotate(270deg)",
@@ -316,7 +316,7 @@ export default function InvoicePage() {
                         height="1.2rem"
                         style={{
                           color: "#888888",
-                          border: "1px solid #888888",
+                          border: "1px solid #ebebeb",
                           borderRadius: "50%",
                           padding: ".1rem",
                         }}
@@ -328,7 +328,7 @@ export default function InvoicePage() {
                         height="1.2rem"
                         style={{
                           color: "#888888",
-                          border: "1px solid #888888",
+                          border: "1px solid #ebebeb",
                           borderRadius: "50%",
                           padding: ".1rem",
                         }}
@@ -545,7 +545,7 @@ export default function InvoicePage() {
                         height="1.2rem"
                         style={{
                           color: "#888888",
-                          border: "1px solid #888888",
+                          border: "1px solid #ebebeb",
                           borderRadius: "50%",
                           padding: ".1rem",
                         }}
@@ -557,7 +557,7 @@ export default function InvoicePage() {
                         height="1.2rem"
                         style={{
                           color: "#888888",
-                          border: "1px solid #888888",
+                          border: "1px solid #ebebeb",
                           borderRadius: "50%",
                           padding: ".1rem",
                         }}

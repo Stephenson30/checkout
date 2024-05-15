@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import styles from "@/components/Address.module.css"
 
 const EthereumAddress = ({ address }) => {
   const [copied, setCopied] = useState(false);
@@ -25,12 +26,13 @@ const EthereumAddress = ({ address }) => {
   };
 
   return (
-    <div>
+    <div className={styles.div}>
       <Image src={"/code.png"} alt="qrcode transfer" width={200} height={200} style={{
         margin: "0 auto", display:"block"
       }}/>
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"5px", width:"100%", position:"relative", fontWeight:"bold"}}>
-        <p style={{fontSize:".8em", background:"rgb(173, 216, 230, 0.4)", padding:".4em", borderRadius:"15px", width:"fitContent"}}>{address}</p><br/>
+      <div>
+        <span>0xDBe9234dd590384dF...</span>
+        <p>0xDBe9234dd590384dFA5eac91FEAe8C73f4c1a29a</p>
         <button onClick={copyToClipboard} style={{padding:".5em", background:"#9c00e5", color:"#fff",border:"none",borderRadius:"8px", cursor:"pointer"}}>{copied ? "Copied!" : "Copy"}</button>
       </div>
     </div>

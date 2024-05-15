@@ -1,0 +1,52 @@
+.div {
+  width: 100%;
+}
+
+.div > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.div button {
+  width: 30%;
+}
+
+.div span {
+  font-size: 0.8em;
+  background: rgb(173, 216, 230, 0.4);
+  padding: 0.4em;
+  border-radius: 15px;
+  color: black;
+}
+.div p {
+  display: none;
+}
+
+@media (min-width: 650px) {
+  .div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .div p {
+    font-size: 0.8em;
+    background: rgb(173, 216, 230, 0.4);
+    padding: 0.4em;
+    border-radius: 15px;
+    width: 70;
+    display: block;
+    color: black;
+  }
+  .div span {
+    display: none;
+  }
+}

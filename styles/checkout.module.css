@@ -219,6 +219,17 @@
   background: none;
   margin-top: 0.5rem;
   color: #9d9d9d;
+  display: inline-block;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22%23000%22 d%3D%22M2 OLO 2h4L2 OzM2 512-2HO12 2z%22/%3E%3C/svg%3E') no-repeat right 10px center;
+  background-color: #fff;
+  background-size: 10px;
+}
+
+.currency select::-ms-expand {
+  display: none;
 }
 
 .currency div {

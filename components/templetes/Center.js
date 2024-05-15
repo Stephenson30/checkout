@@ -217,7 +217,7 @@ export default function Center({
           disabled={!isDisabled ? false : true}
           style={{
             background: !isDisabled ? "#c344ff" : "#ecc2ff",
-            display: !isDisabled ? "flex" : "none",
+            // display: !isDisabled ? "flex" : "none",
           }}
         >
           <Icon
@@ -226,7 +226,7 @@ export default function Center({
             className={styles.icon}
           />
           <a href={null} download={null}>
-            Download slip
+            {!isDisabled?"Download slip":"Downloading..."}
           </a>
         </button>
       </div>
